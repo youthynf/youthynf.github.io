@@ -4,7 +4,6 @@ author: ynf
 date: 2021-04-14 19:38:31 +0800
 categories: [JAVA]
 tags: [JAVA, EL表达式]
-pin: true
 ---
 #### 内容概要：
 ##### 1、EL表达式介绍

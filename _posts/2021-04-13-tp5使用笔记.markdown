@@ -4,7 +4,6 @@ author: ynf
 date: 2021-04-13 16:52:31 +0800
 categories: [PHP]
 tags: [PHP, ThinkPHP]
-pin: true
 ---
 #### 1.路由书写规则route.php
 
