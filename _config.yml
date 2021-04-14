@@ -84,7 +84,11 @@ disqus:
   comments: true  # boolean type, the global switch for posts comments.
   shortname: 'ynf'    # Fill with your Disqus shortname. › https://help.disqus.com/en/articles/1717111-what-s-a-shortname
 
-paginate: 10
+# 分页
+gems: [jekyll-paginate]
+# 每页有几个项目
+paginate: 5
+paginate_path: "page/:num/"
 
 # ------------ The following options are not recommended to be modified ------------------
 
