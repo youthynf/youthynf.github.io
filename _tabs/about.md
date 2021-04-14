@@ -5,4 +5,4 @@ order: 4
 ---
 
 
-> **Note**: Add Markdown syntax content to file `_tabs/about.md` and it will show up on this page.
+> **申明**: 本博客仅作为本人学习记录使用，如内容涉及侵权，请联系本人紧急处理。
