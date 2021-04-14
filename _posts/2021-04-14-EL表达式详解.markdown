@@ -1,0 +1,174 @@
+---
+title: EL表达式详解
+author: ynf
+date: 2021-04-14 19:38:31 +0800
+categories: [JAVA]
+tags: [JAVA, EL表达式]
+pin: true
+---
+#### 内容概要：
+##### 1、EL表达式介绍
+- Expression Language表达式语言
+- 是一种在JSP页面获取数据的简单方式(只能获取数据，不能设置数据)
+- 在JSP2.0开始引入概念
+
+语法格式：
+```$xslt
+在JSP页面的任何静态部分均可通过：${expression}来获取到指定表达式的值
+```
+##### 2、EL获取数据(从四大域中获取属性)
+EL只能从四大域中获取属性，而域的范围从小到大依次是：
+```$xslt
+pageScope：从page范围域属性空间中查找指定的key
+requestScope：从request范围域属性空间中查找指定的key
+sessionScope：从session范围域属性空间中查找指定的key
+applicationScope：从application范围域属性空间中查找指定的key
+```
+jsp页面中可以给对应的域设置值：
+```$xslt
+<%
+    pageContext.setAttribute("name", "linjie");
+    request.setAttribute("name", "lucy");
+    session.setAttribute("name", "king");
+    application.setAttribute("name", "bilibili");
+%>
+```
+##### 3、EL中的其他重要的内置对象（4个）
+（1）pageContext
+
+ 在EL中直接${pageContext.request}即可获取request对象，其底层调用的是pageContext.getRequest()方法。同理，也可以通过类似方法获取其他对象，用法：
+```$xslt
+${pageContext.request}
+
+//最常用，代表web应用下的根，可以看出下面action中的路径可读性更强了
+${pageContext.request.contextPath }
+<form action="${pageContext.request.contextPath }/regster" method="POST">
+    xxx<input type="text" name="name"/><br>
+    yyy<input type="text" name="age"/><br>
+    <input type="submit" value="点击">
+</form>
+
+```
+
+（2）param（获取请求中的指定参数）
+
+实现页面跳转的值传递问题，其底层实际调用request.getParameter()
+```$xslt
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+    name=${param.name }<br>
+    age=${param.age }<br>
+</body>
+</html>
+```
+
+（3）paramValues
+
+获取请求中的指定参数的所有值，其底层实际调用request.getParameterValues()
+index.jsp:
+```$xslt
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<%-- ${pageContext.request.contextPath }代表web应用的根 --%>
+    <form action="${pageContext.request.contextPath }/show.jsp" method="POST">
+        xxx<input type="text" name="name"/><br>
+        yyy<input type="text" name="age"/><br>
+
+        爱好：
+        <input type="checkbox" name="hobby" value="sleep">睡觉
+        <input type="checkbox" name="hobby" value="play">玩
+        <input type="checkbox" name="hobby" value="eat">吃
+        <input type="submit" value="点击">
+    </form>
+</body>
+</html>
+```
+show.jsp:
+```$xslt
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+    name=${param.name }<br>
+    age=${param.age }<br>
+
+
+    hobby[0]=${paramValues.hobby[0] }<br>
+    hobby[1]=${paramValues.hobby[1] }<br>
+</body>
+</html>
+```
+
+**initParam**
+web.xml
+获取初始化参数，其底层调用的是ServletContext.getInitParameter()
+```$xslt
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>07eltttt</display-name>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+
+<!--初始化参数 -->
+  <context-param>
+    <param-name>name</param-name>
+    <param-value>林杰</param-value>
+  </context-param>
+
+
+  <servlet>
+    <display-name>Regster</display-name>
+    <servlet-name>Regster</servlet-name>
+    <servlet-class>linjie.com.Regster</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Regster</servlet-name>
+    <url-pattern>/regster</url-pattern>
+  </servlet-mapping>
+</web-app>
+
+```
+index.jsp
+```$xslt
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+    name=${initParam.name }
+</body>
+</html>
+```
+##### 4、EL访问Bean的属性
+##### 5、EL访问数组中的数据
+##### 6、EL获取list中数据
+##### 7、EL访问Map
+##### 8、EL中的运算符(empty)
+##### 9、自定义EL函数
+##### 10、总结
+
+##### 转载地址：https://blog.csdn.net/w_linux/article/details/79850223
