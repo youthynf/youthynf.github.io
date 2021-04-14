@@ -17,7 +17,7 @@ timezone: Asia/Shanghai
 # --------------------------
 title: 小小青年                          # the main title
 
-tagline: 再遥远的目标都经不起执着的追求...   # it will display as the sub-title
+tagline: 遥远的目标经不起执着的追求...   # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
   学习、分享、记录
