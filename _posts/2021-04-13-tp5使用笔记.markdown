@@ -2,7 +2,7 @@
 title: tp5使用笔记
 author: ynf
 date: 2021-04-13 16:52:31 +0800
-categories: [Blogging, Tutorial]
+categories: [PHP]
 tags: [PHP, ThinkPHP]
 pin: true
 ---
