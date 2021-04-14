@@ -1,8 +1,10 @@
 ---
-layout: post
-title:  "tp5使用笔记"
-date:   2021-04-13 16:52:31 +0800
-categories: notes
+title: tp5使用笔记
+author: ynf
+date: 2021-04-13 16:52:31 +0800
+categories: [Blogging, Tutorial]
+tags: [PHP, ThinkPHP]
+pin: true
 ---
 #### 1.路由书写规则route.php
 
@@ -52,7 +54,7 @@ class Test
         echo $name;
 //        return "hello,here is test/hello";
     }
-    
+
     public function test()
     {
         $all = Request::instance()->param();
@@ -68,7 +70,7 @@ class Test
         $all = input('param.');//获取所有，获取单个param.name
         //$all = input('get.age');
     }
-    
+
     //使用依赖注入方式获取参数变量
     public function test2(Request $request)
     {
@@ -81,19 +83,19 @@ class Test
 #### 3.信息校验
 方式之一：独立验证
 ```
-use think/Validate; 
+use think/Validate;
 
 public function getBanner($id) {
     $data = [
         'name' => 'vender',
         'email' => 'vender@qq.com',
     ];
-    
+
     $validate = new Validate([
         'name' => 'require|max:10',
         'email' => 'email',
     ]);
-    
+
     $result = $validate->batch()->check($data);
     var_dump($validate->getError());
 }
@@ -124,13 +126,13 @@ public function getBanner($id){
         'name' => 'vender13456879',
         'email' => 'vender@qq.com',
     ];
-    
+
     //需要引入类
     //$validate = new TestValidate();
-    
+
     //直接使用助手函数进行创建对象
     $validate = validate('TestValidate');
-    
+
     $result = $validate->batch()->check($data);
     var_dump($validate->getError());
 }
@@ -404,7 +406,7 @@ class ExceptionHandle extends Handle
             $this->code = 500;
             $this->msg = "服务器内部错误";
             $this->errorCode = 999;
-            
+
             //调用日志写入方法，写入异常信息
             $this->recordErrorLog($e);
         }

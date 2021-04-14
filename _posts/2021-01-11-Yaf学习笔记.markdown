@@ -1,8 +1,10 @@
 ---
-layout: post
-title:  "Yaf学习笔记"
-date:   2021-01-11 16:23:31 +0800
-categories: notes
+title: Yaf学习笔记
+author: ynf
+date: 2021-01-11 16:23:31 +0800
+categories: [Blogging, Tutorial]
+tags: [PHP, Yaf]
+pin: true
 ---
 #### 1、初始化yaf配置：
 在php扩展目录加入yaf扩展文件后，配置php.ini文件，添加如下代码：
@@ -11,7 +13,7 @@ categories: notes
 extension=php_yaf.dll
 
 ;设置自动加载机制
-yaf.use_spl_autoload=1 
+yaf.use_spl_autoload=1
 
 ;启用命名空间
 yaf.use_namespace=1
@@ -20,16 +22,16 @@ yaf.use_namespace=1
 ```
 + public
   |- index.php //入口文件
-  |- .htaccess //重写规则    
+  |- .htaccess //重写规则
   |+ css
   |+ img
   |+ js
 + conf
-  |- application.ini //配置文件   
+  |- application.ini //配置文件
 + application
   |+ controllers
      |- Index.php //默认控制器
-  |+ views    
+  |+ views
      |+ index   //控制器
         |- index.phtml //默认视图
   |+ modules //其他模块
@@ -40,8 +42,8 @@ yaf.use_namespace=1
 #### 3、入口文件内容：
 ```
 <?php
-//指向public的上一级 
-define("APP_PATH",  realpath(dirname(__FILE__) . '/../')); 
+//指向public的上一级
+define("APP_PATH",  realpath(dirname(__FILE__) . '/../'));
 
 //加载框架的配置文件
 $app = new Yaf\Application(APP_PATH . "/conf/application.ini");
@@ -69,7 +71,7 @@ application.view.ext="phtml"
 application.modules="Index,Admin"
 application.library=APP_PATH "/lib"
 application.library.directory=APP_PATH "/lib"
-application.library.namespace=""	
+application.library.namespace=""
 application.bootstrap=APP_PATH "/app" "/Bootstrap.php"
 application.baseUri=""
 application.dispatcher.defaultRoute=""
@@ -105,7 +107,7 @@ use Yaf\Dispatcher;
  * 这些方法, 都接受一个参数:Yaf_Dispatcher $dispatcher
  * 调用的次序, 和申明的次序相同
  */
- 
+
 class Bootstrap extends Bootstrap_Abstract {
 
     //加载应用初始化配置
@@ -125,7 +127,7 @@ class Bootstrap extends Bootstrap_Abstract {
         $config = new Yaf\Config\Ini(APP_PATH . '/conf/routing.ini');
         $dispatcher->getRouter()->addConfig($config);
     }
-    
+
     //初始化模块自己专属的配置
     public function _initModules(Yaf\Dispatcher $dispatcher)
     {
@@ -149,18 +151,18 @@ application.modules="index,admin,test"
 ```
 + public
   |- index.php //入口文件
-  |- .htaccess //重写规则    
+  |- .htaccess //重写规则
   |+ css
   |+ img
   |+ js
 + conf
-  |- application.ini //配置文件   
+  |- application.ini //配置文件
 + application
   |+ controllers
      |+Backend
         |-Index.php //控制器文件
      |- Index.php //默认控制器
-  |+ views    
+  |+ views
      |+ index   //控制器
         |- index.phtml //默认视图
   |+ modules //其他模块
