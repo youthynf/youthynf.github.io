@@ -1,0 +1,837 @@
+---
+title: SSM框架整合
+author: ynf
+date: 2021-04-14 16:44:31 +0800
+categories: [JAVA]
+tags: [JAVA, Spring, MyBatis, SpringMVC]
+pin: true
+---
+#### 一、开发环境说明
+```$xslt
+开发工具：IntelliJ IDEA 2019.2.3专业版
+
+Tomcat：Tomcat 9.0.45
+
+MySQL：mysql 5.6
+```
+#### 二、快速整合ssm三大框架
+##### 1、创建空的maven项目，如ssm_test;
+##### 2、通过pom.xml引入依赖：
+```$xslt
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>ssm-zh</groupId>
+    <artifactId>com.study</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <!-- 引入框架依赖 -->
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/junit/junit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>5.2.3.RELEASE</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/cglib/cglib -->
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>3.3.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.5</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/aopalliance/aopalliance -->
+        <dependency>
+            <groupId>aopalliance</groupId>
+            <artifactId>aopalliance</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-aspects -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
+            <version>5.2.3.RELEASE</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.1.21</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>5.2.3.RELEASE</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>5.2.3.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jsp-api</artifactId>
+            <version>2.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.10.3</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.10.3</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.10.3</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.6</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.4</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.5.4</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.16</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/log4j/log4j -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+        <!--slf4j+log4j-->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.25</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>2.0.4</version>
+        </dependency>
+    </dependencies>
+
+    <!-- 解决Invalid bound statement (not found)异常-->
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory><!--所在的目录-->
+                <includes><!--包括目录下的.properties,.xml文件都会扫描到-->
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+    </build>
+</project>
+```
+##### 3、resource目录下创建对应的配置文件
+spring.xml:
+```$xslt
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx
+       https://www.springframework.org/schema/tx/spring-tx.xsd
+">
+
+    <!--Spring除了控制器不扫描，其他的组件都扫描，包括service，component等-->
+    <context:component-scan base-package="com.study">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!--引入外部配置文件-->
+    <context:property-placeholder location="classpath:db.properties"></context:property-placeholder>
+    <!--配置数据源-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="username" value="${jdbc.username}"></property>
+        <property name="password" value="${jdbc.password}"></property>
+        <property name="driverClassName" value="${jdbc.driverName}"></property>
+        <property name="url" value="${jdbc.url}"></property>
+    </bean>
+
+    <!--配置事务管理器的bean对象-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+    <!--开启基于注解的事务管理器的配置-->
+    <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
+
+    <!--添加mybatis的配置-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--指定配置文件的位置-->
+        <property name="configLocation" value="classpath:mybatis-config.xml"></property>
+        <property name="dataSource" ref="dataSource"></property>
+        <property name="mapperLocations" value="classpath:com/study/dao/*.xml"></property>
+    </bean>
+    <!--创建mybatis扫描器，批量配置映射文件-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.study.dao"></property>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+    </bean>
+</beans>
+```
+mybatis-config.xml:
+```$xslt
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <setting name="logImpl" value="LOG4J"/>
+    </settings>
+    <typeAliases>
+        <package name="com.study.bean"/>
+    </typeAliases>
+</configuration>
+```
+springmvc.xml:
+```$xslt
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!--springmvc只扫描控制器-->
+    <context:component-scan base-package="com.study" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    <!--静态资源的扫描-->
+    <mvc:default-servlet-handler></mvc:default-servlet-handler>
+    <!--动态资源的扫描-->
+    <mvc:annotation-driven></mvc:annotation-driven>
+    <!--配置视图管理器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/page/"></property>
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+</beans>
+```
+db.properties:
+```$xslt
+jdbc.username=root
+jdbc.password=youth1312
+jdbc.url=jdbc:mysql://localhost:3306/ssm_test?serverTimezone=UTC
+jdbc.driverName=com.mysql.cj.jdbc.Driver
+```
+
+log4j.properties:
+```$xslt
+
+log4j.rootLogger=info, stdout
+
+log4j.logger.com.study.dao=TRACE
+
+log4j.appender.stdout=org.apache.log4j.ConsoleAppender
+log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+log4j.appender.stdout.layout.ConversionPattern=%5p [%t] - %m
+
+log4j.logger.java.sql=DEBUG
+log4j.logger.java.sql.Connection = DEBUG
+log4j.logger.java.sql.Statement = DEBUG
+log4j.logger.java.sql.PreparedStatement = DEBUG
+log4j.logger.java.sql.ResultSet = DEBUG
+```
+
+##### 4、创建简单的服务端程序
+bean：Emp.java
+```$xslt
+package com.study.bean;
+
+import java.sql.Date;
+
+public class Emp {
+    private Integer empno;
+    private String ename;
+    private String job;
+    private Integer mgr;
+    private Date hiredate;
+    private Double sal;
+    private Double comm;
+    private Integer deptno;
+
+    public Emp() {
+    }
+
+    public Emp(Integer empno, String ename, String job, Integer mgr, Date hiredate, Double sal, Double comm, Integer deptno) {
+        this.empno = empno;
+        this.ename = ename;
+        this.job = job;
+        this.mgr = mgr;
+        this.hiredate = hiredate;
+        this.sal = sal;
+        this.comm = comm;
+        this.deptno = deptno;
+    }
+
+    public Integer getEmpno() {
+        return empno;
+    }
+
+    public void setEmpno(Integer empno) {
+        this.empno = empno;
+    }
+
+    public String getEname() {
+        return ename;
+    }
+
+    public void setEname(String ename) {
+        this.ename = ename;
+    }
+
+    public String getJob() {
+        return job;
+    }
+
+    public void setJob(String job) {
+        this.job = job;
+    }
+
+    public Integer getMgr() {
+        return mgr;
+    }
+
+    public void setMgr(Integer mgr) {
+        this.mgr = mgr;
+    }
+
+    public Date getHiredate() {
+        return hiredate;
+    }
+
+    public void setHiredate(Date hiredate) {
+        this.hiredate = hiredate;
+    }
+
+    public Double getSal() {
+        return sal;
+    }
+
+    public void setSal(Double sal) {
+        this.sal = sal;
+    }
+
+    public Double getComm() {
+        return comm;
+    }
+
+    public void setComm(Double comm) {
+        this.comm = comm;
+    }
+
+    public Integer getDeptno() {
+        return deptno;
+    }
+
+    public void setDeptno(Integer deptno) {
+        this.deptno = deptno;
+    }
+
+    @Override
+    public String toString() {
+        return "Emp{" +
+                "empno=" + empno +
+                ", ename='" + ename + '\'' +
+                ", job='" + job + '\'' +
+                ", mgr=" + mgr +
+                ", hiredate=" + hiredate +
+                ", sal=" + sal +
+                ", comm=" + comm +
+                ", deptno=" + deptno +
+                '}';
+    }
+}
+
+```
+dao：EmpDao.java
+```$xslt
+package com.study.dao;
+
+import com.study.bean.Emp;
+import org.apache.ibatis.annotations.MapKey;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+import java.util.Map;
+
+public interface EmpDao {
+
+    public Emp findEmpByEmpno(Integer empno);
+
+    public int updateEmp(Emp emp);
+
+    public int deleteEmp(Integer empno);
+
+    public int insertEmp(Emp emp);
+
+    Emp selectEmpByNoAndName(@Param("empno") Integer empno, @Param("ename") String ename, @Param("t") String tablename);
+
+    Emp selectEmpByNoAndName2(Map<String, Object> map);
+
+    List<Emp> selectAllEmp();
+
+    Map<String, Object> selectEmpByEmpReturnMap(Integer empno);
+
+    @MapKey("empno")
+    Map<Integer, Emp> getAllEmpReturnMap();
+
+    Emp selectEmpAndDept(Integer empno);
+
+    Emp selectEmpAndDeptBySimple(Integer empno);
+
+    List<Emp> selectEmpByStep(Integer deptno);
+
+    public List<Emp> getEmpByCondition(Emp emp);
+
+    public List<Emp> getEmpByConditionChoose(Emp emp);
+
+    public List<Emp> getEmpByDeptnos(@Param("deptnos") List<Integer> deptnos);
+
+    public int updateEmpByEmpno(Emp emp);
+
+}
+```
+dao对应的mapper.xml:EmpDao.xml
+```$xslt
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace:编写接口的全类名，就是告诉要实现该配置文件是哪个接口的具体实现-->
+<mapper namespace="com.study.dao.EmpDao">
+    <!--    <cache></cache>-->
+    <!--    <cache type="org.mybatis.caches.ehcache.EhcacheCache"></cache>-->
+    <!--
+    select:表示这个操作是一个查询操作
+    id表示的是要匹配的方法的名称
+    resultType:表示返回值的类型，查询操作必须要包含返回值的类型
+    #{属性名}：表示要传递的参数的名称
+    -->
+    <select id="findEmpByEmpno" resultType="com.study.bean.Emp">
+        select * from emp where empno = #{empno}
+    </select>
+    <!--增删改查操作不需要返回值，增删改返回的是影响的行数，mybatis会自动做判断-->
+    <insert id="insertEmp">
+        insert into emp(empno,ename) values(#{empno},#{ename})
+    </insert>
+    <update id="updateEmp">
+        update emp set ename=#{ename} where empno = #{empno}
+    </update>
+
+
+    <delete id="deleteEmp">
+        delete from emp where empno = #{empno}
+    </delete>
+
+    <!--
+    当查询语句中包含多个参数的是，如果使用#{属性名称}就无法获取具体的值了，那么应该如何使用呢？
+        下面就是mybatis的参数传递方式
+        1、如果是单个参数，
+            基本类型：使用#{随便写}
+            引用类型：使用#{类的属性名称}
+        2、多个参数：
+            当查询的时候传入多个参数的时候，就无法简单的通过#{参数名}来获取值了，
+            只能通过arg0,arg1...或者param1,param2等方式来获取值
+            原因就在于，mybatis在传入多个参数的时候，会将这些参数封装到一个map中，此时map中的key就是
+            arg0,arg1,param1,param2这些值，但是很明显，这样的传值方式不是很友好，没有办法根据参数的名称来
+            获取具体的值，因此可以使用如下的方式来指定参数的key是什么
+            Emp selectEmpByNoAndName(@Param("empno") Integer empno, @Param("ename") String ename);
+                也就是通过@Param来指定存入map中的key值是什么
+        3、使用map来传递参数：
+                依然是直接使用#{key}来获取具体的属性值
+    -->
+
+    <!--
+        当使用#{}来获取值的时候会发现打印的sql语句如下：
+            select * from emp where empno=? and ename=?
+        当使用${}来获取值的时候会发现打印的sql语句如下：
+            select * from emp where empno=7369 and ename='SMITH'
+        通过刚刚的案例大家已经发现了存在的问题了，
+        使用#{}方式进行取值：采用的是参数预编译的方式，参数的位置使用？进行替代，不会出现sql注入的问题
+        使用${}方式进行取值：采用的是直接跟sql语句进行拼接的方式
+    -->
+    <select id="selectEmpByNoAndName" resultType="com.study.bean.Emp">
+        select * from ${t} where empno=${empno} and ename=${ename}
+    </select>
+
+    <select id="selectEmpByNoAndName2" resultType="com.study.bean.Emp">
+        select * from emp where empno=#{empno} and ename=#{ename}
+    </select>
+
+    <!--当返回值的结果是集合的时候，返回值的类型依然写的是集合中具体的类型-->
+    <select id="selectAllEmp" resultType="com.study.bean.Emp">
+        select  * from emp
+    </select>
+
+    <!--在查询的时候可以设置返回值的类型为map，当mybatis查询完成之后会把列的名称作为key
+    列的值作为value，转换到map中
+    -->
+    <select id="selectEmpByEmpReturnMap" resultType="map">
+        select * from emp where empno = #{empno}
+    </select>
+
+    <!--注意，当返回的结果是一个集合对象的是，返回值的类型一定要写集合具体value的类型
+    同时在dao的方法上要添加@MapKey的注解，来设置key是什么结果
+    @MapKey("empno")
+    Map<Integer,Emp> getAllEmpReturnMap();-->
+    <select id="getAllEmpReturnMap" resultType="com.study.bean.Emp">
+        select * from emp
+    </select>
+
+    <!--再做查询的时候，有时候需要关联其他对象，因此需要使用关联查询
+    可以通过下面自定义结果集的方式实现
+    -->
+    <select id="selectEmpAndDept" resultMap="empDept">
+        select * from emp left join dept on emp.deptno = dept.deptno where empno = #{empno};
+    </select>
+    <!--<resultMap id="empDept" type="com.study.bean.Emp">
+        <id column="empno" property="empno"></id>
+        <result column="ename" property="ename"></result>
+        <result column="job" property="job"></result>
+        <result column="mgr" property="mgr"></result>
+        <result column="hiredate" property="hiredate"></result>
+        <result column="sal" property="sal"></result>
+        <result column="comm" property="common"></result>
+        <result column="deptno" property="dept.deptno"></result>
+        <result column="dname" property="dept.dname"></result>
+        <result column="loc" property="dept.loc"></result>
+    </resultMap>-->
+
+    <!--在mybatis中还提供了一种简单的形式，使用association标签可以搞定
+    -->
+    <resultMap id="empDept" type="com.study.bean.Emp">
+        <id column="empno" property="empno"></id>
+        <result column="ename" property="ename"></result>
+        <result column="job" property="job"></result>
+        <result column="mgr" property="mgr"></result>
+        <result column="hiredate" property="hiredate"></result>
+        <result column="sal" property="sal"></result>
+        <result column="comm" property="common"></result>
+        <association property="dept" javaType="com.study.bean.Dept">
+            <id column="deptno" property="deptno"></id>
+            <result column="dname" property="dname"></result>
+            <result column="loc" property="loc"></result>
+        </association>
+    </resultMap>
+
+    <select id="selectEmpAndDeptBySimple" resultMap="simpleEmpAndDept">
+        select * from emp where empno = #{empno}
+    </select>
+    <resultMap id="simpleEmpAndDept" type="com.study.bean.Emp">
+        <id column="empno" property="empno"></id>
+        <result column="ename" property="ename"></result>
+        <result column="job" property="job"></result>
+        <result column="mgr" property="mgr"></result>
+        <result column="hiredate" property="hiredate"></result>
+        <result column="sal" property="sal"></result>
+        <result column="comm" property="common"></result>
+        <association property="dept" select="com.study.dao.DeptDao.getDeptAndEmpsBySimple" column="deptno" fetchType="eager">
+        </association>
+    </resultMap>
+
+    <select id="selectEmpByStep" resultType="com.study.bean.Emp">
+        select * from emp where deptno = #{deptno}
+    </select>
+
+    <!-- <select id="getEmpByCondition" resultType="com.study.bean.Emp">
+         select * from emp
+         <where>
+             <if test="empno!=null">
+                 empno > #{empno}
+             </if>
+             <if test="ename!=null">
+                 and ename like #{ename}
+             </if>
+             <if test="sal!=null">
+                 and sal > #{sal}
+             </if>
+         </where>-->
+    <!--
+    trim截取字符串：
+    prefix：前缀，为sql整体添加一个前缀
+    prefixOverrides:去除整体字符串前面多余的字符
+    suffixOverrides:去除后面多余的字符串
+    -->
+    <select id="getEmpByCondition" resultType="com.study.bean.Emp">
+        select * from emp
+
+        <trim prefix="where" prefixOverrides="and" suffixOverrides="and">
+            <if test="empno!=null">
+                empno > #{empno} and
+            </if>
+            <if test="ename!=null">
+                ename like #{ename} and
+            </if>
+            <if test="sal!=null">
+                sal > #{sal} and
+            </if>
+        </trim>
+    </select>
+
+    <!--foreach是对集合进行遍历
+    collection="deptnos"  指定要遍历的集合
+    close="" 表示以什么结束
+    index="" 给定一个索引值
+    item=""  遍历的每一个元素的值
+    open=""  表示以什么开始
+    separator="" 表示多个元素的分隔符
+    -->
+    <select id="getEmpByDeptnos" resultType="Emp">
+        select * from emp where deptno in
+        <foreach collection="deptnos" close=")" index="idx" item="deptno" open="(" separator=",">
+            #{deptno}
+        </foreach>
+    </select>
+
+    <select id="getEmpByConditionChoose" resultType="com.study.bean.Emp">
+        select * from emp
+        <where>
+            <choose>
+                <when test="empno!=null">
+                    empno > #{empno}
+                </when>
+                <when test="ename!=null">
+                    ename like #{ename}
+                </when>
+                <when test="sal!=null">
+                    sal > #{sal}
+                </when>
+                <otherwise>
+                    1=1
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+    <update id="updateEmpByEmpno">
+        update emp
+        <set>
+            <if test="empno!=null">
+                empno=#{empno},
+            </if>
+            <if test="ename!=null">
+                ename = #{ename},
+            </if>
+            <if test="sal!=null">@
+                sal = #{sal}
+            </if>
+        </set>
+        <where>
+            empno = #{empno}
+        </where>
+    </update>
+
+</mapper>
+```
+controller:TestController.java
+```$xslt
+package com.study.controller;
+
+import com.study.bean.Emp;
+import com.study.dao.EmpDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+@Controller
+public class TestController {
+    @Autowired
+    EmpDao empDao;
+
+    @RequestMapping("/test")
+    public String test() {
+        System.out.println("test");
+        Emp empByEmpno = empDao.findEmpByEmpno(1);
+        System.out.println(empByEmpno);
+        return "success";
+    }
+
+    @RequestMapping("/getEmp")
+    public ModelAndView getEmp(Integer id) {
+        System.out.println(id);
+        Emp empByEmpno = empDao.findEmpByEmpno(id);
+        System.out.println(empByEmpno);
+        // ModelAndView使用
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("emp", empByEmpno);
+        modelAndView.setViewName("emp");
+        return modelAndView;
+    }
+}
+```
+到此，服务端的简单编码已经完成，接下来是web前端开发。
+
+##### 5、web前端部分开发
+右键项目->Add Framework Support-> 勾选web application生成对应的web目录（<span style="color:red">注意：需要专业版idea才有这个功能，社区版没有找到对应的提供</span>）
+
+编写web.xml文件：
+```$xslt
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:spring.xml</param-value>
+    </context-param>
+    <!--springmvc的核心配置类-->
+    <servlet>
+        <servlet-name>springmvc</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:springmvc.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>springmvc</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    <!--字符编码过滤器-->
+    <filter>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>utf-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!--支持rest风格的过滤器-->
+    <filter>
+        <filter-name>HiddenHttpMethodFilter</filter-name>
+        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>HiddenHttpMethodFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+</web-app>
+```
+创建前端页面：/web/WEB-INF/page/success.jsp
+```$xslt
+<%--
+  Created by IntelliJ IDEA.
+  User: yannengfa
+  Date: 2021/4/13
+  Time: 10:20
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+ssm success
+</body>
+</html>
+```
+
+##### 6、配置Tomcat服务器
+① 编辑右上角的edit configuration；
+
+② 点击“+”添加Tomcat Server；
+
+③ 选择Application server服务器；
+
+④ 此时会弹出fix警告，点击fix；
+
+⑤应用并保存。
+
+此时程序可以进入run状态。
+
+##### 7、web项目中需要复制对应的jar包
+File -> project structure -> Artifacts:
+
+在WEB-INF目录中创建lib文件夹，并右键该文件夹 Add Copy of -> Library Files，将所有jar包选中并确认复制 -> 应用并保存。
+
+##### 8、配置项目对应的jdk版本
+
+##### 9、运行Tomcat
+
+##### 10、访问：http://localhost:8080/test测试即可。
+
+
+
+
+
+
