@@ -1,5 +1,5 @@
 ---
-title: 常用依赖整理
+title: 常用maven依赖整理
 author: ynf
 date: 2021-04-14 20:18:31 +0800
 categories: [JAVA]

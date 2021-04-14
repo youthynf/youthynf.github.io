@@ -1,5 +1,5 @@
 ---
-title: 常见异常报错收集
+title: Exception解决笔记
 author: ynf
 date: 2021-04-14 21:18:31 +0800
 categories: [JAVA]
