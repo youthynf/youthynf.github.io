@@ -1,0 +1,52 @@
+---
+title: 常用依赖整理
+author: ynf
+date: 2021-04-14 20:18:31 +0800
+categories: [JAVA]
+tags: [JAVA, Maven]
+pin: true
+---
+#### 1、json数据返回
+```$xslt
+<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+<dependency>
+    <groupId>com.alibaba</groupId>
+    <artifactId>fastjson</artifactId>
+    <version>1.2.76</version>
+</dependency>
+```
+使用：
+```$xslt
+@RequestMapping("/json")
+@ResponseBody //返回json
+public JSONObject json(Integer id) {
+    Emp empByEmpno = empDao.findEmpByEmpno(id);
+    System.out.println(empByEmpno);
+    return JSONObject.parseObject(JSONObject.toJSONString(empByEmpno));
+}
+```
+
+#### 2、log日志打印
+```$xslt
+<!--slf4j+log4j-->
+<dependency>
+    <groupId>org.slf4j</groupId>
+    <artifactId>slf4j-log4j12</artifactId>
+    <version>1.7.25</version>
+</dependency>
+```
+使用：
+log4j.properties:
+```$xslt
+log4j.rootLogger=info, stdout
+log4j.logger.com.study.dao=TRACE
+log4j.appender.stdout=org.apache.log4j.ConsoleAppender
+log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+log4j.appender.stdout.layout.ConversionPattern=%5p [%t] - %m
+
+log4j.logger.java.sql=DEBUG
+log4j.logger.java.sql.Connection = DEBUG
+log4j.logger.java.sql.Statement = DEBUG
+log4j.logger.java.sql.PreparedStatement = DEBUG
+log4j.logger.java.sql.ResultSet = DEBUG
+```
