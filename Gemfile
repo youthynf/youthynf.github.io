@@ -8,16 +8,11 @@ group :test do
   gem "html-proofer", "~> 3.18"
 end
 
-platform :mswin, :mingw, :x64_mingw do
-  gem "tzinfo-data"
-  gem "win32_api"
-end
-
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
 # and associated library.
 install_if -> { RUBY_PLATFORM =~ %r!mingw|mswin|java! } do
   gem "tzinfo", "~> 1.2"
-#  gem "tzinfo-data"
+  gem "tzinfo-data"
 end
 
 # Performance-booster for watching directories on Windows
