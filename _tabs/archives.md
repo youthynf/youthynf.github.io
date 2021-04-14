@@ -1,6 +1,6 @@
 ---
 layout: archives
-title: 日志
+title: Archives
 icon: fas fa-archive
 order: 3
 ---

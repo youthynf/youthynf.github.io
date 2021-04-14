@@ -1,23 +1,16 @@
 #!/usr/bin/env bash
 #
-# How does it work:
+# 1. Bump latest version number to files:
+#   - _sass/jekyll-theme-chirpy.scss
+#   - assets/js/.copyright.js
+#   - assets/js/dist/*.js (will be built by gulp later)
+#   - jekyll-theme-chirpy.gemspec
+#   - Gemfile.lock
+#   - package.json
 #
-#   1. Bump latest version number to files:
-#     - _sass/jekyll-theme-chirpy.scss
-#     - assets/js/_copyright.js
-#     - assets/js/dist/*.js (will be built by gulp later)
-#     - jekyll-theme-chirpy.gemspec
-#     - package.json
+# 2. Create a git-tag on release branch
 #
-#   2. Create a git-tag on release branch
-#
-#   3. Build a RubyGems package base on the latest git-tag
-#
-#
-# Usage:
-#
-#   Switch to 'master' branch or 'X-Y-stable' branch with argument '-m',
-#`  and then run this script.
+# 3. Build a RubyGems package base on the latest git-tag
 #
 #
 # Requires: Git, Gulp, RubyGems
@@ -48,9 +41,9 @@ check() {
     exit -1
   fi
 
-  # ensure the current branch is 'master' or running in 'manual' mode
-  if [[ "$(git branch --show-current)" != "master" && $manual_release == "false" ]]; then
-    echo "Error: This operation must be performed on the 'master' branch or '--manual' mode!"
+  # ensure the current branch is 'master'
+  if [[ "$(git branch --show-current)" != "master" && manual_release == "false" ]]; then
+    echo "Error: This operation must be performed on the 'master' branch!"
     exit -1
   fi
 
