@@ -88,7 +88,6 @@ disqus:
 gems: [jekyll-paginate]
 # 每页有几个项目
 paginate: 5
-paginate_path: "page/:num/"
 
 # ------------ The following options are not recommended to be modified ------------------
 
