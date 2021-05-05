@@ -9,8 +9,255 @@ tags: [JAVA, Spring]
 
 #### 一、Spring初识
 
-#### 二、IOC容器的理解及使用
+### 二、Spring基本使用
+#### 1、ioc.xml基本语法
+**bean标签：**
+```aidl
+<bean id="person" class="com.study.bean.Person"></bean>
+```
+常用属性：<br />
+id：bean的自定义id<br />
+class：指定具体的类名<br />
+scope：bean的作用域：singleton、prototype、request、session，默认情况下是单例的。多实例时，容器启动的时候不会创建多实例bean，只有在获取对象的时候才会创建该对象，每次创建都是一个新的对象；单实例则在容器启动完成之前就已经创建好对象，获取的所有对象都是同一个<br />
+parent：继承关系bean的配置，可以指定具体的类，也可以bean的id<br />
+factory-bean：指定使用哪个工厂实例，实例工厂方式生成对象<br />
+factory-method：指定哪个方法是工厂方法，配合class属性指定静态工厂类<br />
+> 在利用工厂模式创建bean实例的时候有两种方式，分别是静态工厂和实例工厂。静态工厂是指通过class属性指定静态工厂类，生成对象时调用工厂类的静态方法即可，不需要生成工厂对象；而实例工厂则需要先创建工厂实例，然后通过实例对象调用对应的生产对象方法。
 
-#### 三、AOP的理解及使用
+init-method：指定对象初始化时调用方法<br />
+destroy-method： 指定对象销毁是调用的方法<br />
+>bean生命周期表示bean的创建到销毁<br>
+如果bean是单例，容器在启动的时候会创建好，关闭的时候会销毁创建的bean，初始化和销毁都会调用<br>
+如果bean是多例，获取的时候才创建对象，初始化时会调用，但销毁的时候不会有任何的调用<br>
+>注意：applicationContext没有close方法，需要使用具体的子类，使用：<br>
+((ClassPathXmlApplicationContext)context).close();
 
-#### 四、Spring源码理解
+autowire：spring基于xml文件的自动装配，不需要手动给bean写内部属性，自动进行装配；
+>其中default/no：不自动装配；byName：按照名字进行装配，以属性名作为id去容器中查找组件，进行赋值，如果找不到则装配null；byType：按照类型进行装配,以属性的类型作为查找依据去容器中找到这个组件，如果有多个类型相同的bean对象，那么会报异常，如果找不到则装配null；constructor：按照构造器进行装配，先按照有参构造器参数的类型进行装配，没有就直接装配null；如果按照类型找到了多个，那么就使用参数名作为id继续匹配，找到就装配，找不到就装配null
+
+**bean的子标签constructor-arg:**
+```aidl
+<bean id="person" class="com.study.bean.Person">
+    <constructor-arg value="1"></constructor-arg>
+    <constructor-arg value="lisi"></constructor-arg>
+    <constructor-arg value="20"></constructor-arg>
+    <constructor-arg value="女"></constructor-arg>
+</bean>
+```
+常用属性：<br />
+value：在使用构造器赋值的时候可以省略name属性，但是此时就要求必须严格按照构造器参数的顺序来填写了<br />
+index：如果想不按照顺序来添加参数值，那么可以搭配index属性来使用<br />
+type：当有多个参数个数相同，不同类型的构造器的时候，可以通过type来强制类型<br />
+
+**bean的子标签property：**给复杂的属性赋值
+```
+<bean id="person" class="com.mashibing.bean.Person">
+    <property name="name">
+        <!--赋空值-->
+        <null></null>
+    </property>
+    <!--通过ref引用其他对象，引用外部bean-->
+    <property name="address" ref="address"></property>
+    <!--引用内部bean-->
+    <!-- <property name="address">
+        <bean class="com.mashibing.bean.Address">
+            <property name="province" value="北京"></property>
+            <property name="city" value="北京"></property>
+            <property name="town" value="西城区"></property>
+        </bean>
+    </property>-->
+    <!--为list赋值-->
+    <property name="books">
+        <list>
+            <!--内部bean-->
+            <bean id="book1" class="com.mashibing.bean.Book">
+                <property name="name" value="多线程与高并发"></property>
+                <property name="author" value="马士兵"></property>
+                <property name="price" value="1000"></property>
+            </bean>
+            <!--外部bean-->
+            <ref bean="book2"></ref>
+        </list>
+    </property>
+    <!--给map赋值-->
+    <property name="maps" ref="myMap"></property>
+    <!--给property赋值-->
+    <property name="properties">
+        <props>
+            <prop key="aaa">aaa</prop>
+            <prop key="bbb">222</prop>
+        </props>
+    </property>
+    <!--给数组赋值-->
+    <property name="hobbies">
+        <array>
+            <value>book</value>
+            <value>movie</value>
+            <value>game</value>
+        </array>
+    </property>
+    <!--给set赋值-->
+    <property name="sets">
+        <set>
+            <value>111</value>
+            <value>222</value>
+            <value>222</value>
+        </set>
+    </property>
+</bean>
+```
+常用属性：<br />
+name：属性名称<br />
+value： 属性值<br />
+ref：引用对应的bean的id<br />
+
+**通过命名空间为bean赋值，简化配置文件中属性声明的写法**
+```aidl
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd"
+>
+
+<!-- 添加配置 -->
+<bean id="person" class="com.study.bean.Person" p:id="3" p:name="wangwu" p:age="22" p:gender="男"></bean>
+
+<!--util名称空间创建集合类型的bean-->
+<util:map id="myMap">
+        <entry key="key1" value="value1"></entry>
+        <entry key="key2" value-ref="book2"></entry>
+        <entry key="key03">
+            <bean class="com.mashibing.bean.Book">
+                <property name="name" value="西游记" ></property>
+                <property name="author" value="吴承恩" ></property>
+                <property name="price" value="100" ></property>
+            </bean>
+        </entry>
+</util:map>
+```
+
+#### 2、配置bean对象初始化方法的前后处理方法
+spring中包含一个BeanPostProcessor的接口，可以在bean的初始化方法的前后调用该方法，如果配置了初始化方法的前置和后置处理器，无论是否包含初始化方法，都会进行调用
+```aidl
+package com.study.bean;
+
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.BeanPostProcessor;
+
+public class MyBeanPostProcessor implements BeanPostProcessor {
+    /**
+     * 在初始化方法调用之前执行
+     * @param bean  初始化的bean对象
+     * @param beanName  xml配置文件中的bean的id属性
+     * @return
+     * @throws BeansException
+     */
+    @Override
+    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+        System.out.println("postProcessBeforeInitialization:"+beanName+"调用初始化前置方法");
+        return bean;
+    }
+
+    /**
+     * 在初始化方法调用之后执行
+     * @param bean
+     * @param beanName
+     * @return
+     * @throws BeansException
+     */
+    @Override
+    public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+        System.out.println("postProcessAfterInitialization:"+beanName+"调用初始化后缀方法");
+        return bean;
+    }
+}
+```
+
+#### 3、spring创建第三方bean对象
+首先，引入对应的pox依赖：
+```aidl
+<!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
+<dependency>
+    <groupId>com.alibaba</groupId>
+    <artifactId>druid</artifactId>
+    <version>1.1.21</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>5.1.47</version>
+</dependency>
+```
+其次，编写配置文件：
+```aidl
+<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+    <property name="username" value="root"></property>
+    <property name="password" value="123456"></property>
+    <property name="url" value="jdbc:mysql://localhost:3306/demo"></property>
+    <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+</bean>
+```
+
+#### 4、spring引用外部配置文件
+在resource中添加dbconfig.properties
+```aidl
+username=root
+password=123456
+url=jdbc:mysql://localhost:3306/demo
+driverClassName=com.mysql.jdbc.Driver
+```
+编写配置文件
+```aidl
+<!--加载外部配置文件
+    在加载外部依赖文件的时候需要context命名空间
+-->
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+<!-- 将下面的内容添加到对应的beans标签内 -->
+<context:property-placeholder location="classpath:dbconfig.properties"/>
+<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+    <property name="username" value="${username}"></property>
+    <property name="password" value="${password}"></property>
+    <property name="url" value="${url}"></property>
+    <property name="driverClassName" value="${driverClassName}"></property>
+</bean>
+```
+
+#### 5、SpEL的使用：SpEL:Spring Expression Language,spring的表达式语言，支持运行时查询操作对象
+```
+<bean id="address" class="com.mashibing.bean.Address">
+    <property name="province" value="河北"></property>
+    <property name="city" value="邯郸"></property>
+    <property name="town" value="武安"></property>
+</bean>
+<bean id="person4" class="com.mashibing.bean.Person">
+    <!--支持任何运算符-->
+    <property name="age" value="#{12*2}"></property>
+    <!--可以引用其他bean的某个属性值-->
+    <property name="name" value="#{address.province}"></property>
+    <!--引用其他bean-->
+    <property name="address" value="#{address}"></property>
+    <!--调用静态方法-->
+    <property name="hobbies" value="#{T(java.util.UUID).randomUUID().toString().substring(0,4)}"></property>
+    <!--调用非静态方法-->
+    <property name="gender" value="#{address.getCity()}"></property>
+</bean>
+```
+
+#### 三、IOC容器的理解
+
+#### 四、AOP的理解
+
+#### 五、Spring源码理解
