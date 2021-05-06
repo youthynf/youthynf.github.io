@@ -11,7 +11,7 @@ tags: [JAVA, Spring]
 
 ### 二、Spring基本使用
 #### 1、ioc.xml基本语法
-**bean标签：**
+**(1) bean标签：**
 ```aidl
 <bean id="person" class="com.study.bean.Person"></bean>
 ```
@@ -35,7 +35,7 @@ destroy-method： 指定对象销毁是调用的方法<br />
 autowire：spring基于xml文件的自动装配，不需要手动给bean写内部属性，自动进行装配；
 >其中default/no：不自动装配；byName：按照名字进行装配，以属性名作为id去容器中查找组件，进行赋值，如果找不到则装配null；byType：按照类型进行装配,以属性的类型作为查找依据去容器中找到这个组件，如果有多个类型相同的bean对象，那么会报异常，如果找不到则装配null；constructor：按照构造器进行装配，先按照有参构造器参数的类型进行装配，没有就直接装配null；如果按照类型找到了多个，那么就使用参数名作为id继续匹配，找到就装配，找不到就装配null
 
-**bean的子标签constructor-arg:**
+**(2) bean的子标签constructor-arg:**
 ```aidl
 <bean id="person" class="com.study.bean.Person">
     <constructor-arg value="1"></constructor-arg>
@@ -51,7 +51,7 @@ type：当有多个参数个数相同，不同类型的构造器的时候，可�
 
 **bean的子标签property：**给复杂的属性赋值
 ```
-<bean id="person" class="com.mashibing.bean.Person">
+<bean id="person" class="com.study.bean.Person">
     <property name="name">
         <!--赋空值-->
         <null></null>
@@ -60,7 +60,7 @@ type：当有多个参数个数相同，不同类型的构造器的时候，可�
     <property name="address" ref="address"></property>
     <!--引用内部bean-->
     <!-- <property name="address">
-        <bean class="com.mashibing.bean.Address">
+        <bean class="com.study.bean.Address">
             <property name="province" value="北京"></property>
             <property name="city" value="北京"></property>
             <property name="town" value="西城区"></property>
@@ -70,9 +70,9 @@ type：当有多个参数个数相同，不同类型的构造器的时候，可�
     <property name="books">
         <list>
             <!--内部bean-->
-            <bean id="book1" class="com.mashibing.bean.Book">
+            <bean id="book1" class="com.study.bean.Book">
                 <property name="name" value="多线程与高并发"></property>
-                <property name="author" value="马士兵"></property>
+                <property name="author" value="laoma"></property>
                 <property name="price" value="1000"></property>
             </bean>
             <!--外部bean-->
@@ -111,7 +111,7 @@ name：属性名称<br />
 value： 属性值<br />
 ref：引用对应的bean的id<br />
 
-**通过命名空间为bean赋值，简化配置文件中属性声明的写法**
+**(3) 通过命名空间为bean赋值，简化配置文件中属性声明的写法**
 ```aidl
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml version="1.0" encoding="UTF-8"?>
@@ -131,7 +131,7 @@ ref：引用对应的bean的id<br />
         <entry key="key1" value="value1"></entry>
         <entry key="key2" value-ref="book2"></entry>
         <entry key="key03">
-            <bean class="com.mashibing.bean.Book">
+            <bean class="com.study.bean.Book">
                 <property name="name" value="西游记" ></property>
                 <property name="author" value="吴承恩" ></property>
                 <property name="price" value="100" ></property>
@@ -214,7 +214,7 @@ driverClassName=com.mysql.jdbc.Driver
 编写配置文件
 ```aidl
 <!--加载外部配置文件
-    在加载外部依赖文件的时候需要context命名空间
+    在加载外部依赖文件的时候需要context命名空间 
 -->
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
@@ -237,12 +237,12 @@ driverClassName=com.mysql.jdbc.Driver
 
 #### 5、SpEL的使用：SpEL:Spring Expression Language,spring的表达式语言，支持运行时查询操作对象
 ```
-<bean id="address" class="com.mashibing.bean.Address">
+<bean id="address" class="com.study.bean.Address">
     <property name="province" value="河北"></property>
     <property name="city" value="邯郸"></property>
     <property name="town" value="武安"></property>
 </bean>
-<bean id="person4" class="com.mashibing.bean.Person">
+<bean id="person4" class="com.study.bean.Person">
     <!--支持任何运算符-->
     <property name="age" value="#{12*2}"></property>
     <!--可以引用其他bean的某个属性值-->
@@ -256,8 +256,232 @@ driverClassName=com.mysql.jdbc.Driver
 </bean>
 ```
 
-#### 三、IOC容器的理解
+#### 6、注解使用
+**(1) Spring中包含4个主要的组件添加注解：**<br />
+@Controller:控制器，推荐给controller层添加此注解<br />
+@Service:业务逻辑，推荐给业务逻辑层添加此注解<br />
+@Repository:仓库管理，推荐给数据访问层添加此注解<br />
+@Component:给不属于以上基层的组件添加此注解<br />
+>注意：我们虽然人为的给不同的层添加不同的注解，但是在spring看来，可以在任意层添加任意注解，spring底层是不会给具体的层次验证注解，这样写的目的只是为了提高可读性，最偷懒的方式，就是给所有想交由IOC容器管理的bean对象添加component注解
 
-#### 四、AOP的理解
 
-#### 五、Spring源码理解
+**(2) 使用注解的步骤：**<br />
+a、添加上述四个注解中的任意一个<br />
+b、添加自动扫描注解的组件，此操作需要依赖context命名空间<br />
+c、添加自动扫描的标签context:component-scan<br />
+```aidl
+<!--
+定义自动扫描的基础包:
+base-package:指定扫描的基础包，spring在启动的时候会将基础包及子包下所有加了注解的类都自动
+            扫描进IOC容器
+-->
+<context:component-scan base-package="com.study"></context:component-scan>
+```
+```aidl
+//PersonController.java
+package com.study.controller;
+
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class PersonController {
+    public PersonController() {
+        System.out.println("创建对象");
+    }
+}
+
+//PersonDao.java
+package com.study.dao;
+
+import org.springframework.stereotype.Repository;
+
+@Repository("personDao")
+@Scope(value="prototype")
+public class PersonDao {
+}
+```
+>注意：当使用注解注册组件和使用配置文件注册组件是一样的，但是要注意：<br />
+1、组件的id默认就是组件的类名首字符小写，如果非要改名字的话，直接在注解中添加即可<br />
+2、组件默认情况下都是单例的,如果需要配置多例模式的话，可以在注解下添加@Scope注解<br />
+
+**(3) 定义扫描宝石要包含的类和不要包含的类：**
+当定义好基础扫描的包之后，可以排除包中的某些类，使用如下的方式:<br />
+type:表示指定过滤的规则<br />
+annotation：按照注解进行排除，标注了指定注解的组件不要,expression表示要过滤的注解完整类名<br />
+assignable：指定排除某个具体的类，按照类排除，expression表示不注册的具体类名<br />
+aspectj：后面讲aop的时候说明要使用的aspectj表达式，不用<br />
+custom：定义一个typeFilter,自己写代码决定哪些类被过滤掉，不用<br />
+regex：使用正则表达式过滤，不用<br />
+
+**(4) 使用@AutoWired进行自动注入：**
+```aidl
+package com.study.controller;
+
+import com.study.service.PersonService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class PersonController {
+
+    @Autowired
+    private PersonService personService;
+
+    public PersonController() {
+        System.out.println("创建对象");
+    }
+
+    public void getPerson(){
+        personService.getPerson();
+    }
+}
+```
+>注意：当使用AutoWired注解的时候，自动装配的时候是根据类型实现的。<br />
+1、如果只找到一个，则直接进行赋值，<br />
+2、如果没有找到，则直接抛出异常，<br />
+3、如果找到多个，那么会按照变量名作为id继续匹配,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;1、匹配上直接进行装配<br />
+&nbsp;&nbsp;&nbsp;&nbsp;2、如果匹配不上则直接报异常<br />
+
+**(4) 其他注解：**<br />
+@Qualifier：用来指定id的名称，让spring不要使用变量名
+>当使用@Qualifier注解的时候也会有两种情况：<br />
+1、找到，则直接装配<br />
+2、找不到，就会报错<br />
+
+**(5) 自动装配的注解@AutoWired，@Resource**<br />
+在使用自动装配的时候，出了可以使用@AutoWired注解之外，还可以使用@Resource注解。两个注解的区别:<br />
+1、@AutoWired:是spring中提供的注解，@Resource:是jdk中定义的注解，依靠的是java的标准<br />
+2、@AutoWired默认是按照类型进行装配，默认情况下要求依赖的对象必须存在，@Resource默认是按照名字进行匹配的，同时可以指定name属性。<br />
+3、@AutoWired只适合spring框架，而@Resource扩展性更好<br />
+
+**(6) 泛型依赖注入**<br />
+BaseService.java
+```aidl
+package com.study.service;
+
+import com.study.dao.BaseDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+public class BaseService<T> {
+    
+    @Autowired
+    BaseDao<T> baseDao;
+    
+    public void save(){
+        System.out.println("自动注入的对象："+baseDao);
+        baseDao.save();
+    }
+}
+```
+StudentService.java
+```aidl
+package com.study.service;
+
+import com.study.bean.Student;
+import com.study.dao.StudentDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class StudentService extends BaseService<Student> {
+}
+```
+
+#### 7、AOP相关使用
+**(1) 添加pom依赖：**<br>
+```aidl
+<!-- https://mvnrepository.com/artifact/cglib/cglib -->
+<dependency>
+    <groupId>cglib</groupId>
+    <artifactId>cglib</artifactId>
+    <version>3.3.0</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+<dependency>
+    <groupId>org.aspectj</groupId>
+    <artifactId>aspectjweaver</artifactId>
+    <version>1.9.5</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/aopalliance/aopalliance -->
+<dependency>
+    <groupId>aopalliance</groupId>
+    <artifactId>aopalliance</artifactId>
+    <version>1.0</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-aspects -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-aspects</artifactId>
+    <version>5.2.3.RELEASE</version>
+</dependency>
+```
+**(2) 使用步骤：**<br>
+1、正常将目标类和切面类加入到IOC容器中，即添加IOC自动扫描配置，并在对应类上添加组件注解；<br>
+2、设置程序中的切面类：使用@Aspect注解；<br>
+3、设置切面类中的方法是在什么时候、哪里执行；<br>
+```aidl
+package com.study.util;
+
+import org.aspectj.lang.annotation.*;
+import org.springframework.stereotype.Component;
+
+import java.lang.reflect.Method;
+import java.util.Arrays;
+
+@Component
+@Aspect
+public class LogUtil {
+
+    /*
+    设置下面方法在什么时候运行
+        @Before:在目标方法之前运行：前置通知
+        @After:在目标方法之后运行：后置通知
+        @AfterReturning:在目标方法正常返回之后：返回通知
+        @AfterThrowing:在目标方法抛出异常后开始运行：异常通知
+        @Around:环绕：环绕通知
+
+        当编写完注解之后还需要设置在哪些方法上执行，使用表达式
+        execution(访问修饰符  返回值类型 方法全称)
+     */
+    @Before("execution( public int com.study.inter.MyCalculator.*(int,int))")
+    public static void start(){
+//        System.out.println("XXX方法开始执行，使用的参数是："+ Arrays.asList(objects));
+//        System.out.println(method.getName()+"方法开始执行，参数是："+ Arrays.asList(objects));
+        System.out.println("方法开始执行，参数是：");
+    }
+
+    @AfterReturning("execution( public int com.study.inter.MyCalculator.*(int,int))")
+    public static void stop(){
+//        System.out.println("XXX方法执行结束，结果是："+ Arrays.asList(objects));
+//        System.out.println(method.getName()+"方法执行结束，结果是："+ Arrays.asList(objects));
+        System.out.println("方法执行完成，结果是：");
+
+    }
+
+    @AfterThrowing("execution( public int com.study.inter.MyCalculator.*(int,int))")
+    public static void logException(){
+//        System.out.println(method.getName()+"方法出现异常："+ e.getMessage());
+        System.out.println("方法出现异常：");
+    }
+
+    @After("execution( public int com.study.inter.MyCalculator.*(int,int))")
+    public static void end(){
+//        System.out.println(method.getName()+"方法执行结束了......");
+        System.out.println("方法执行结束了......");
+    }
+}
+```
+4、开启基于注解的aop的功能：<br>
+```aidl
+<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+```
+
+>综上所述：在spring容器中，如果有接口，那么会使用jdk自带的动态代理，如果没有接口，那么会使用cglib的动态代理。动态代理的实现原理，后续会详细讲。
+
+### 三、IOC容器的理解
+
+### 四、AOP的理解
+
+### 五、Spring源码理解
