@@ -58,17 +58,17 @@ docker pull 镜像名
 
 ### **5、容器相关操作**
 创建容器
-```shell script
+```
 docker run 镜像名 //前台运行
 docker run -d 镜像名 //后台运行
 docker run -d -p 8000:8080 镜像名 //后台运行并进行端口映射，其中8000是宿主机开放端口，8080是容器端口
 ```
 查看运行中的容器：
-```shell script
+```
 docker ps
 ```
 停止运行中的容器：
-```shell script
+```
 docker stop 容器名
 ```
 删除容器：
@@ -129,7 +129,7 @@ docker-compose --version
 mkdir wordpress
 ```
 在目录下创建docker-compose.yml配置文件，内容：
-```yml
+```
 version: "3.9"
     
 services:
@@ -166,7 +166,7 @@ docker-compose up -d
 
 ### **9、实战应用**<br>
 创建dockeefile文件：
-```dockerfile
+```
 FROM openjdk:8u222-jre
 WORKDIR /usr/local/bsbdj
 ADD bsbdj.jar .
@@ -184,7 +184,7 @@ docker build -t mashibing.com/bsbdj-app .
 docker run mashibing.com/bsbdj-app
 ```
 创建数据库Dockerfile文件
-```dockerfile
+```
 FROM mysql:5.7
 WORKDIR /docker-entrypoint-initdb.d
 ADD init-db.sql .
@@ -199,7 +199,7 @@ docker run -d -e MYSQL_ROOT_PASSWORD=root  mashibing.com/bsbdj-db
 ```
 ### **10、使用docker-compose编排容器：**
 编辑docker-compose.yml文件：
-```yaml
+```
 version: '3.3'
 services:
   db:
@@ -223,7 +223,7 @@ environment表示启动容器时通过-e添加的附加环境变量；<br>
 depends_on表示依赖的服务，指向具体的服务名称，可以实现容器见的互联互通；<br>
 ports表示端口映射；<br>
 执行compose：在docker-compose.yml的目录中直接执行即可
-```shell script
+```
 docker-compose up
 ```
 后台运行：
@@ -243,14 +243,14 @@ docker-compose down
 ## Kubernetes
 ### **前置准备**<br>
 ### **1. 设置主机名与时区**<br>
-```shell script
+```
 timedatectl set-timezone Asia/Shanghai  #都要执行
 hostnamectl set-hostname master   #132执行
 hostnamectl set-hostname node1    #133执行
 hostnamectl set-hostname node2    #137执行
 ```
 ### **2. 关闭防火墙，三台虚拟机都要设置，生产环境跳过这一步**
-```shell script
+```
 sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
 setenforce 0
 systemctl disable firewalld
@@ -259,14 +259,14 @@ systemctl stop firewalld
 
 ### **3、安装具体步骤**
 将镜像包上传至服务器每个节点：网络原因改用离线安装略
-```shell script
+```
 mkdir /usr/local/k8s-install
 cd /usr/local/k8s-install
 #XFTP上传安装文件
 ```
 
 按每个Centos上安装Docker
-```shell script
+```
 tar -zxvf docker-ce-18.09.tar.gz
 cd docker 
 yum localinstall -y *.rpm
@@ -373,7 +373,7 @@ service kubelet start
 kubectl create -f 部署yml文件 
 ```
 yml模板：
-```yaml
+```
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata: 
@@ -439,7 +439,7 @@ kubectl delete deployment 部署名
 ### **10、外部访问Tomcat集群：**<br>
 **（1）nodeport方式**<br>
 编写service的yml文件：如tomcat-service.yml
-```yaml
+```
 apiVersion: v1
 kind: Service
 metadata:
@@ -470,7 +470,7 @@ kubectl delete service 服务名
 
 **（2）利用Rinted端口转发工具实现Service负载均衡**<br>
  修改tomcat-service.yml文件：仅仅注释两行代码
-```yaml
+```
 apiVersion: v1
 kind: Service
 metadata:
@@ -597,7 +597,7 @@ kutectl delete service 服务名
 ```
 yml配置文件：<br>
 demo-app-deploy.yml
-```yaml
+```
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
@@ -623,7 +623,7 @@ spec:
           mountPath: /usr/local/demo-dist
 ```
 demo-app-service.yml
-```yaml
+```
 apiVersion: v1
 kind: Service
 metadata:
@@ -638,7 +638,7 @@ spec:
     targetPort: 80
 ```
 demo-db-deploy.yml
-```yaml
+```
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
@@ -667,7 +667,7 @@ spec:
           mountPath: /docker-entrypoint-initdb.d
 ```
 demo-db-service.yml
-```yaml
+```
 apiVersion: v1
 kind: Service
 metadata:
@@ -682,7 +682,7 @@ spec:
     targetPort: 3306
 ```
 application.yml
-```yaml
+```
 server:
   port: 80
 spring:
