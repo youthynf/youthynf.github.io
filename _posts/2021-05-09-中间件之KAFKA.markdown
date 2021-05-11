@@ -1,0 +1,239 @@
+---
+title: 中间件学习之KAFKA
+author: ynf
+date: 2021-05-09 07:23:31 +0800
+categories: [MQ]
+tags: [kafka]
+---
+##KAFKA学习
+作用：解耦、削峰填谷、异步处理
+
+mq消费种类：至多一次消费观、没限制
+
+kafka关键字
+topic：一个消息只能进入一个topic中；
+partition：每个topic会根据分区数划分多个分区，每个分区相互独立，有key使用hash分发，无key使用轮询；
+分区数：决定每个topic有多少个partition；
+副本因子：决定每个partition在kafka集群中有多少个副本；
+broker：kafka集群中的机器，每一个机器就是一个broker，每个broker负责若干个分区；
+offset：每个分区都是顺序的，分区间序列互不干扰；分区内有序，全局不能确保有序；
+consumer group:由多个consumer组成，
+
+日志分区：log.retention.hours=168(七天)
+
+kafka快的原因：顺序写入和零拷贝
+正常IO：
+
+DMA：
+
+正常网络IO：
+
+零拷贝网络IO
+
+二、kafka搭建 && Topic管理
+1、安装java环境
+查看jdk是否安装
+rpm -qa | jdk
+
+安装jdk
+rpm -ivh jdk-8u191-linux-x64.rpm
+
+增加了java目录 
+ll /usr/java
+
+卸载jdk
+rpm -e `rpm -qa | grep jdk`
+
+查看java版本
+java -version
+
+sum公司提供的命令，查看java进程
+jps
+
+配置java环境变量
+vi ~/bashrc
+编辑：
+JAVA_HOME=/usr/java/latest
+PATH=$PATH:$JAVA_HOME/bin
+CLASSPATH=.
+export JAVA_HOME
+export PATH
+export CLASSPATH
+保存后，加载配置：
+source .bashrc
+测试环境变量配置情况：
+echo $JAVA_HOME
+
+2、配置主机名与IP的绑定关系
+vim /etc/hosts
+192.168.93.129 CentOS
+
+3、关闭防火墙
+service iptables status
+service iptables start
+service iptables stop
+chkconfig iptables off
+chkconfig --list | grep iptables
+
+4、安装zk
+tar -zxf zookeeper.xxxx.tar.gz -C /usr/
+cd /usr/zookeeper.xxx
+cp conf/zoo_sample.cfg conf/zoo.cfg
+vi conf/zoo.cfg
+修改数据目录为 /root/zkdatacd 
+启动：
+cd /usr/zookeeper-xxx/
+./bin/zkServer.sh start zoo.cfg
+
+通过jps查看java进程，显示：
+QuorumPeerMain
+Jps
+
+查看zk的安装情况：
+./bin/zkServer.sh status zoo.cfg //安装成功后显示Mode：standalone
+
+5、安装kafka：
+解压
+tar -zxf kafka_xxx.tgz -C /usr/
+cd /usr/kafka_xxx
+
+配置server.properties:
+broker.id=0
+listeners=PLAINTEXT://当前机器的主机名:9092
+log.dir=/usr/kafka_logs
+zookeeper.connect=当前主机名::2181
+
+kafka启动：
+./bin/kafka-server-start.sh -daemon config/server.properties
+通过jps查看kafka进程
+
+创建topic
+./bin/kafka-topic.sh --bootstrap-server 主机名：9092 -create --topic topic名 --partitions 分区数量 --replication-factor 分区因子数值
+
+消费：阻塞住
+./bin/kafka-console-consumer.sh --bootstrap-server 主机名：9092 --topic topic名 --group group1
+
+生产者：
+./bin/kafka-console-producer.sh --broker-list 主机名：9092 --topic topic名
+
+三、kafka集群搭建
+1、按照上面单个节点部署好环境
+可以用到scp命令：
+scp .bashrc 接收主机名:~/
+
+2、同步时钟
+yum install -y ntpd
+ntpdate ntp1.aliyun.com
+同步时钟：
+clock -w
+
+3、配置zk集群
+先安装zk，后修改配置文件：
+修改data目录为：/root/zkdata
+新增zk集群：
+server.1=CentOSA：2888:3888
+server.2=CentOSB：2888:3888
+server.3=CentOSC：2888:3888
+复制配置到其他节点：
+scp -r /usr/zookeeper-3.4.6 CentOSB:/usr/
+scp -r /usr/zookeeper-3.4.6 CentOSC:/usr/
+在每个节点建立数据目录
+
+给每个节点创建zk的id号：
+A节点：
+echo 1 > /root/zkdata/myid
+B节点：
+echo 2 > /root/zkdata/myid
+C节点：
+echo 3 > /root/zkdata/myid
+
+每个节点都启动zk：
+/usr/zookeeper-3.4.6/bin/zkServer.sh start zoo.cfg
+
+4、安装kafka集群
+先安装单机安装，后配置zk集群：
+zookeeper.connect=CentOSA:2181,CentOSA:2181,CentOSA:2181
+拷贝
+scp -r kafka_xxx CentOSB:/usr/
+scp -r kafka_xxx CentOSC:/usr/
+但需要分别修改对应的配置文件：server.properties
+CentOSB:
+broker.id=1
+listeners=PLAINTEXT://CentOSB:9092
+
+CentOSC:
+broker.id=2
+listeners=PLAINTEXT://CentOSC:9092
+
+5、使用kafka
+集群创建topic
+./bin/kafka-topic.sh --bootstrap-server CentOSA:9092,CentOSB:9092,CentOSC:9092 --create --topic topic01 --partition 3 --replication-factor 2
+
+查看集群topic列表：
+./bin/kafka-topic.sh --bootstrap-server CentOSA:9092,CentOSB:9092,CentOSC:9092 --list
+
+查看topic详情
+./bin/kafka-topic.sh --bootstrap-server CentOSA:9092,CentOSB:9092,CentOSC:9092 --describe --topic topic01
+
+修改分区：只增不减
+./bin/kafka-topic.sh --bootstrap-server CentOSA:9092,CentOSB:9092,CentOSC:9092 --alter --topic topic01 --partition 3 
+
+删除topic
+./bin/kafka-topic.sh --bootstrap-server CentOSA:9092,CentOSB:9092,CentOSC:9092 --delete --topic topic01
+
+消费时三个节点都需要写上：
+./bin/kafka-console-consumer.sh --bootstrap-server CentOSA:9092,CentOSB:9092,CentOSC:9092 --topic topic名 --group 分组名
+
+四、kafka基础API
+
+
+五、kafka监控kafkaEagle
+解压：
+tar -zxf kafka-eagle-bin-xxx.tgz
+cd kafka-eagle-bin-xxx
+tar -zxf kafka-eagle-web-1.4.0-bin.tar.gz -C /usr/
+cd /usr/
+mv kafka-eagle-web-1.4.0-bin kafka-eagle
+
+配置环境变量
+KE_HOME=/usr/kafka-eagle并追加到$PATH
+exports $KE_HOME
+测试
+echo $KE_HOME
+
+配置config文件：
+vim /config/system-config.properties:
+kafka.eagle.zk.cluster.alias-cluster1
+cluster1.zk.list=CentOSA:2181,CentOSB:2181,CentOSC:2181
+kafka.eagle.metrics.charts=true
+修改数据库连接
+
+执行权限
+chmod u+x bin/ke.sh 
+启动
+bin/ke.sh start
+会自动创建数据库并提供对应的web访问网址
+
+六、flume集成
+tar -zxf apache-flume-xxx.tar.gz -C /usr/
+cd /usr/apache-flume-xxx
+配置config
+vim conf/kafka.properties
+启动flume
+./bin/flume-ng agent -c conf/ -n a1  -f conf/kafka.properties -D 启动参数
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
