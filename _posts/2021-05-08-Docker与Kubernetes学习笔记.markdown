@@ -486,7 +486,7 @@ spec:
     targetPort: 8080
 #    nodePort: 32500
 ```
-    
+
 创建service：
 ```
 kubectl create -f tomcat-service.yml
@@ -577,8 +577,8 @@ kubectl apply -f yml文件路径
 ```
 删除部署、服务：
 ```
-kutectl delete deployment 部署名
-kutectl delete service 服务名
+kubectl delete deployment 部署名
+kubectl delete service 服务名
 ```
 
 ### **13、实例实战**
@@ -699,3 +699,32 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
 ```
+
+k8s常用指令：
+
+获取服务列表：kubectl get service
+
+获取部署列表：kubectl get deployment
+
+获取服务的详细信息：kubectl describe service eureka-consumer-service
+
+获取部署的详细信息：kubectl describe deployment eureka-server-deploy
+
+获取pod容器列表：kubectl get pod
+
+获取pod容器列表及详细信息：kubectl get pod -o wide
+
+获取指定pod的详细信息：kubectl describe pod eureka-consumer-deploy-84dfc8d88f-7qrgj
+
+获取pod的日志信息：kubectl logs -f eureka-consumer-deploy-84dfc8d88f-7qrgj
+
+
+
+
+
+
+
+
+
+
+
