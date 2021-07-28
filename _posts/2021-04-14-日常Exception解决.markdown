@@ -79,5 +79,18 @@ Using 'UTF-8' encoding to copy filtered resources.
 
 如果运行出现出现这个错误，说明mapper文件没有在配置文件中注册。
 
-解决办法：
+解决办法：先检查mapper文件中的命名空间是否正确，dao中方法名与mapper中的方法名是否一致，如果不一致进行修改，如果一致则刷新maven重新编译项目，启动就ok了。
 
+#### 5、整合feign请求异常：feign.FeignException: status 404 reading DeptClientService#queryAll()
+
+解决：检查Feign接口中的Mapping地址，是否与服务提供者的Mapping地址一样，必须和服务提供者的Mapping地址一样，否则报异常。
+
+
+
+#### 6、spring单元测试报错：通配符的匹配很全面, 但无法找到元素 'tx:advice' 的声明。
+
+问题出在了tx:advice找不到上了
+
+解决：在applicationContext.xml上的xsi:schemaLocation 加上：
+
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd

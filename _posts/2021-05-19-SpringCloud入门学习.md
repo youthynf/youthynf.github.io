@@ -1,4 +1,3 @@
-```
 ---
 title: SpringCloud学习笔记
 author: ynf
@@ -6,7 +5,6 @@ date: 2021-05-19 14:47:31 +0800
 categories: [JAVA]
 tags: [JAVA, SpringCloud]
 ---
-```
 
 ## SpringCloud学习笔记
 
