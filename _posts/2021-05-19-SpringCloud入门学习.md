@@ -16,7 +16,7 @@ tags: [JAVA, SpringCloud]
 
 ##### 2.1 Eureka注册中心 
 
-- Eureka服务端依赖
+- Eureka服务端搭建
 
   pom.xml
 
@@ -41,11 +41,56 @@ tags: [JAVA, SpringCloud]
         defaultZone: http://localhost:7900/eureka/
   ```
 
+  若需要集群搭建：（下面配置为搭建3个eureka节点的yml配置示例）
+
+  ```
+  spring:
+    application:
+      name: eureka-server
+  eureka:
+    client:
+      register-with-eureka: true
+      fetch-registry: true
+      service-url:
+        defaultZone: http://eureka-7900:7900/eureka/,http://eureka-7901:7901/eureka/,http://eureka-7902:7902/eureka/
+  
+  ---
+  spring:
+    profiles: 7900a
+  server:
+    port: 7900
+  eureka:
+    instance:
+      hostname: eureka-7900
+  
+  ---
+  spring:
+    profiles: 7901
+  server:
+    port: 7901
+  eureka:
+    instance:
+      hostname: eureka-7901
+  
+  ---
+  spring:
+    profiles: 7902
+  server:
+    port: 7902
+  eureka:
+    instance:
+      hostname: eureka-7902
+  ```
+
   代码
 
   ```java
   @EnableEurekaServer //启动类上添加此注解标识该服务为配置中心
   ```
+
+  启动：idea启动时，修改启动configurations，分别创建三个启动配置，profiles分别修改为7900，7901，7902。
+
+
 
 - Eureka客户端服务注册
 

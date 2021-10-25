@@ -61,4 +61,5 @@ spring.jpa.show-sql=true
 <p th:text="${stat == null ? '' : stat.msg}" class=""bg-danger"></p>
 ```
 
+前端模板for循环
 
