@@ -1,4 +1,3 @@
-```
 ---
 title: SpringCloud学习笔记
 author: ynf
@@ -6,7 +5,6 @@ date: 2021-05-19 14:47:31 +0800
 categories: [JAVA]
 tags: [JAVA, SpringCloud]
 ---
-```
 
 ## SpringCloud学习笔记
 
@@ -155,10 +153,47 @@ tags: [JAVA, SpringCloud]
 
 ##### 2.2 服务间调用（RestTemplate，Feign）
 
+- RestTemplate
 
+  依赖注入
+
+  ```java
+  @Bean
+  // 开启负载均衡
+  @LoadBalanced
+  RestTemplate restTemplate() {
+  	return new RestTemplate();
+  }
+  ```
+
+  getForObject请求返回的是Object对象：
+
+  ```java
+  String url ="http://provider/getHi";
+  String respStr = restTemplate.getForObject(url, String.class);
+  ```
+
+  getForEntity请求返回的是ResponseEntity，ResponseEntity是Spring对HTTP请求响应的封装，包括了几个重要的元素，如响应码、contentType、contentLength、响应消息体等。
+
+  ```
+  <200,Hi,[Content-Type:"text/plain;charset=UTF-8", Content-Length:"8", Date:"Fri, 10 Apr 2020 09:58:44 GMT", Keep-Alive:"timeout=60", Connection:"keep-alive"]>
+  ```
+
+  ```java
+  // 例如需要返回一个Map，通过getBody()获取对应的Map对象
+  String url ="http://provider/getMap";
+  ResponseEntity<Map> entity = restTemplate.getForEntity(url, Map.class);
+  System.out.println("respStr: "  + entity.getBody() );
+  //转化字符串输出
+  System.out.println("respStr: " + ToStringBuilder.reflectionToString(entity.getBody() ));
+  ```
+
+  
+
+- 
 
 ##### 常用注解总结：
 
 - @EnableEurekaServer：启动类上添加此注解标识该服务为配置中心；
-- 
+- @RestController <=> @ResponseBody + @Controller 返回响应内容而不是视图；
 
