@@ -2,7 +2,7 @@
 title: 使用jekyll搭建github.io博客
 author: ynf
 date: 2021-04-10 16:52:31 +0800
-categories: [Tools]
+categories: [Jekyll]
 tags: [Jekyll]
 ---
 #### 一、jekyll安装

@@ -2,7 +2,7 @@
 title: Spring从入门到放弃
 author: ynf
 date: 2021-04-14 20:47:31 +0800
-categories: [JAVA]
+categories: [Spring]
 tags: [JAVA, Spring]
 ---
 本文旨在记录Spring框架常见的用法，尽可能地将框架灵活运用起来。

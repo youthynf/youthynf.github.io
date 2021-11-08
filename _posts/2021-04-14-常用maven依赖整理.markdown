@@ -2,7 +2,7 @@
 title: 常用maven依赖整理
 author: ynf
 date: 2021-04-14 20:18:31 +0800
-categories: [JAVA]
+categories: [依赖管理]
 tags: [JAVA, Maven]
 ---
 #### 1、json数据返回

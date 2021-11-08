@@ -2,7 +2,7 @@
 title: SpringBoot入门学习
 author: ynf
 date: 2021-04-14 20:47:31 +0800
-categories: [JAVA]
+categories: [SpringBoot]
 tags: [JAVA, SpringBoot]
 ---
 本文旨在记录SpringBoot框架常见的用法，尽可能地将框架灵活运用起来。

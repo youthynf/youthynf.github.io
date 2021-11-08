@@ -2,7 +2,7 @@
 title: 你对限流了解多少
 author: ynf
 date: 2021-04-19 18:23:31 +0800
-categories: [网络]
+categories: [计算机网络]
 tags: [Network]
 ---
 ### 什么是限流

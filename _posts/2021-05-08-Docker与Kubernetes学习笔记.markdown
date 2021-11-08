@@ -2,7 +2,7 @@
 title: Docker与Kubernetes学习笔记
 author: ynf
 date: 2021-05-08 15:52:31 +0800
-categories: [运维]
+categories: [运维与自动化]
 tags: [Kubernetes, Docker]
 ---
 ```

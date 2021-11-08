@@ -2,7 +2,7 @@
 title: EL表达式详解
 author: ynf
 date: 2021-04-14 19:38:31 +0800
-categories: [JAVA]
+categories: [JAVA基础]
 tags: [JAVA, EL表达式]
 ---
 #### 内容概要：

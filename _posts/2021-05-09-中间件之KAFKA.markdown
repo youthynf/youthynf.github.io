@@ -3,7 +3,7 @@ title: 中间件学习之KAFKA
 author: ynf
 date: 2021-05-09 07:23:31 +0800
 categories: [MQ]
-tags: [kafka]
+tags: [KAFKA]
 ---
 ## KAFKA单机及集群部署学习
 ### 一、概述

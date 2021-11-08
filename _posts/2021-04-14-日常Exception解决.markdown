@@ -2,8 +2,8 @@
 title: Exception解决笔记
 author: ynf
 date: 2021-04-14 21:18:31 +0800
-categories: [JAVA]
-tags: [JAVA, Exceptions]
+categories: [JAVA基础]
+tags: [JAVA, Exception]
 ---
 本文主要收集日常开发过程中遇到的异常报错及坑点，以备忘记。
 
