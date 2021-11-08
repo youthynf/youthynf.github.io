@@ -2,7 +2,7 @@
 title: SSM框架整合
 author: ynf
 date: 2021-04-14 16:44:31 +0800
-categories: [Spring, MyBatis, SpringMVC]
+categories: [Spring]
 tags: [JAVA, Spring, MyBatis, SpringMVC]
 ---
 #### 一、开发环境说明
