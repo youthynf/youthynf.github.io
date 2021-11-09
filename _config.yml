@@ -15,12 +15,12 @@ timezone: Asia/Shanghai
 
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # --------------------------
-title: 严能发                          # the main title
+title: 严能发的博客                          # the main title
 
 tagline: 遥远的目标经不起执着的追求。   # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
-  后端开发、学习、分享、记录
+  全栈开发、学习、分享、记录，架构师成长之路
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
 url: 'https://youthynf.github.io'
