@@ -1,5 +1,5 @@
-User-agent: *
 
-Disallow: /norobots/
+User-agent:*
+Disallow:
 
-Sitemap: https://youthynf.github.io/sitemap.xml
+Sitemap: https://mister-hope.github.io/sitemap.xml
