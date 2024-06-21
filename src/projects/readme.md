@@ -1,16 +1,17 @@
 ---
+cover: /assets/images/cover2.jpg
 icon: pen-to-square
-date: 2022-01-03
+date: 2022-01-12
 category:
-  - 苹果
-  - 水果
+  - 蔬菜
 tag:
   - 红
-  - 大
   - 圆
+star: true
+sticky: true
 ---
 
-# 苹果 3
+# 番茄
 
 ## 标题 2
 

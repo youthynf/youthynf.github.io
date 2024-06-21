@@ -1,15 +1,17 @@
 ---
+cover: /assets/images/cover2.jpg
 icon: pen-to-square
-date: 2022-01-10
+date: 2022-01-12
 category:
-  - 火龙果
-  - 水果
+  - 蔬菜
 tag:
   - 红
-  - 大
+  - 圆
+star: true
+sticky: true
 ---
 
-# 火龙果
+# 待更新
 
 ## 标题 2
 
