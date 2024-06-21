@@ -8,14 +8,14 @@ export default hopeTheme({
 
   author: {
     name: "Mr.Yan",
-    url: "https://mister-hope.com",
+    url: "https://github.com/youthynf",
   },
 
   iconAssets: "fontawesome-with-brands",
 
   logo: "https://theme-hope-assets.vuejs.press/logo.svg",
 
-  repo: "vuepress-theme-hope/vuepress-theme-hope",
+  repo: "youthynf/youthynf.github.io",
 
   docsDir: "src",
 
@@ -32,7 +32,7 @@ export default hopeTheme({
   // 博客相关
   blog: {
     description: "一名专注于技术实践与分享后端工程师",
-    intro: "/intro.html",
+    intro: "/about-author/",
     medias: {
       // Baidu: "https://example.com",
       // BiliBili: "https://example.com",
@@ -73,11 +73,11 @@ export default hopeTheme({
   },
 
   // 加密配置
-  encrypt: {
-    config: {
-      "/demo/encrypt.html": ["1234"],
-    },
-  },
+  // encrypt: {
+  //   config: {
+  //     "/demo/encrypt.html": ["1234"],
+  //   },
+  // },
 
   // 多语言配置
   metaLocales: {

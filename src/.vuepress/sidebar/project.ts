@@ -4,31 +4,31 @@ export const project = arraySidebar([
   {
     text: "实战项目",
     link: "practical-project",
-    icon: "project",
+    icon: "table-list",
   },
-  {
-    text: "系统设计",
-    link: "system-design",
-    icon: "design",
-  },
-  {
-    text: "工具类库",
-    link: "tool-library",
-    icon: "codelibrary-fill",
-  },
-  {
-    text: "开发工具",
-    link: "tools",
-    icon: "tool",
-  },
-  {
-    text: "机器学习",
-    link: "machine-learning",
-    icon: "a-MachineLearning",
-  },
-  {
-    text: "大数据",
-    link: "big-data",
-    icon: "big-data",
-  },
+  // {
+  //   text: "系统设计",
+  //   link: "system-design",
+  //   icon: "design",
+  // },
+  // {
+  //   text: "工具类库",
+  //   link: "tool-library",
+  //   icon: "codelibrary-fill",
+  // },
+  // {
+  //   text: "开发工具",
+  //   link: "tools",
+  //   icon: "tool",
+  // },
+  // {
+  //   text: "机器学习",
+  //   link: "machine-learning",
+  //   icon: "a-MachineLearning",
+  // },
+  // {
+  //   text: "大数据",
+  //   link: "big-data",
+  //   icon: "big-data",
+  // },
 ]);

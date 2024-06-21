@@ -3,16 +3,16 @@ import { arraySidebar } from "vuepress-theme-hope";
 export const lifes = arraySidebar([
   {
     text: "生活分享",
-    icon: "computer",
+    icon: "camera",
     prefix: "personal-share/",
     collapsible: false,
-    children: ["1"],
+    children: [],
   },
   {
     text: "程序人生",
-    icon: "database",
+    icon: "video",
     prefix: "personal-experience/",
     collapsible: false,
-    children: ["1"],
+    children: [],
   }
 ]);
