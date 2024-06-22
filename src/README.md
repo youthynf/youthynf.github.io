@@ -3,7 +3,7 @@ home: true
 layout: BlogHome
 icon: home
 title: 首页
-heroImage: https://theme-hope-assets.vuejs.press/logo.svg
+#heroImage: logo.svg
 heroText: TechTinker-技术修补匠
 heroFullScreen: true
 tagline: 「编程学习+技术分享」涵盖后端开发需要掌握的核心知识

@@ -6,6 +6,10 @@ category:
   - 栏目介绍
 star: true
 sticky: true
+head:
+  - - meta
+    - name: keywords
+      content: SEO plugin
 ---
 
 # 网站介绍
