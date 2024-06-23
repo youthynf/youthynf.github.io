@@ -1,6 +1,5 @@
 ---
 cover: /assets/images/cover2.jpg
-icon: pen-to-square
 date: 2024-06-20
 category:
   - 开发框架
