@@ -1,15 +1,17 @@
 ---
-cover: /assets/images/cover2.jpg
 date: 2024-06-20
-category:
-  - 开发框架
+title: Shiro实战详解
+category: 开发框架
 star: true
 sticky: true
 breadcrumb: false
 head:
   - - meta
     - name: keywords
-      content: SEO plugin
+      content: shiro, shiro详解, shiro实战应用, shiro教程
+  - - meta
+    - name: description
+      content: shiro详细教程，结合实例代码，讲解shiro的基本使用，shiro的Web流程，shiro整合Web（SpringMVC，SpringBoot），shiro的授权方式等内容。
 ---
 
 # Shiro详解
@@ -1609,3 +1611,7 @@ QueryDatabaseAuthenticationHandler无法实现业务需求。
   }
   ```
 * 修改Pac4jConfig，将之前使用的默认CasClient更改为修改的这个！
+
+以上是本文[Shiro实战详解]的全部内容，最新更新会第一时间同步在公众号，推荐关注！
+
+![YouthYnf官方公众号](https://s2.loli.net/2024/07/02/xGYtNbnS4UE5dsl.png)

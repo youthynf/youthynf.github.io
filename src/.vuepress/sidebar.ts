@@ -34,7 +34,17 @@ export default sidebar({
       icon: "mug-hot",
       prefix: "java/",
       collapsible: true,
-      children: "structure",
+      children: [
+        {
+          text: "JVM",
+          prefix: "jvm/",
+          icon: "virtual_machine",
+          collapsible: false,
+          children: [
+            "jvm-basic",
+          ],
+        }
+      ]
     },
     {
       text: "PHP",
