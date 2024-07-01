@@ -9,7 +9,7 @@ export default defineUserConfig({
   base: "/",
 
   lang: "zh-CN",
-  title: "TechTinker",
+  title: "YouthYnf",
   description: "「编程学习+技术分享」涵盖后端开发需要掌握的核心知识",
 
   theme,
