@@ -1612,6 +1612,6 @@ QueryDatabaseAuthenticationHandler无法实现业务需求。
   ```
 * 修改Pac4jConfig，将之前使用的默认CasClient更改为修改的这个！
 
-以上是本文[Shiro实战详解]的全部内容，最新更新会第一时间同步在公众号，推荐关注！
+以上是本文[【Shiro实战详解】](https://youthynf.github.io/framework/Shiro.html)的全部内容，最新更新会第一时间同步在公众号，推荐关注！
 
 ![YouthYnf官方公众号](https://s2.loli.net/2024/07/02/xGYtNbnS4UE5dsl.png)
