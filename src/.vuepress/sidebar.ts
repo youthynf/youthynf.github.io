@@ -108,6 +108,13 @@ export default sidebar({
       prefix: "tools/",
       collapsible: true,
       children: "structure",
+    },
+    {
+      text: "面试突击",
+      icon: "star",
+      prefix: "interviews/",
+      collapsible: true,
+      children: "structure",
     }
   ],
 });
