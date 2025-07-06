@@ -7,11 +7,8 @@ export default defineUserConfig({
     lang: "zh-CN",
     title: "程序员Null的自我修养",
     description: "「编程学习+技术分享」涵盖后端开发需要掌握的核心知识",
-
     base: "/",
-
     theme,
-
     alias: {
         // 你可以在这里将别名定向到自己的组件
         // 比如这里我们将主题的主页组件改为用户 .vuepress/components 下的 HomePage.vue
