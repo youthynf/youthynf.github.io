@@ -55,7 +55,7 @@ export default defineComponent({
                                     "wechat-img",
                                 ],
                                 // src: withBase("wechat.png"),
-                                src: "http://qiniu.chanmufeng.com/2022-08-04-022629.png",
+                                src: "https://s2.loli.net/2025/07/06/UC8drNyHeahktEu.jpg",
                                 property: "image",
                                 alt: "Wechat Img",
                             })
