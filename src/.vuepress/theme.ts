@@ -7,15 +7,17 @@ export default hopeTheme({
   hostname: "https://youthynf.github.io",
 
   author: {
-    name: "youthynf",
+    name: "Null",
     url: "https://github.com/youthynf",
   },
+
+
 
   iconAssets: "fontawesome-with-brands",
 
   logo: "logo.svg",
 
-  repo: "youthynf/youthynf.github.io",
+  repo: "https://github.com/youthynf/youthynf.github.io",
 
   docsDir: "src",
 
@@ -95,15 +97,11 @@ export default hopeTheme({
     autoCatalog: {
       index: true
     },
-    // 启用之前需安装 @waline/client
-    // 警告: 这是一个仅供演示的测试服务，在生产环境中请自行部署并使用自己的服务！
-    // comment: {
-    //   provider: "Waline",
-    //   serverURL: "https://waline-comment.vuejs.press",
-    // },
 
     // 搜索插件
-    searchProPlugin({
+    search: {
+      // 使用本地搜索
+      provider: "local",
       // 索引全部内容
       indexContent: true,
       // 为分类和标签添加索引
@@ -117,7 +115,13 @@ export default hopeTheme({
           formatter: "标签：$content",
         },
       ],
-    }),
+    },
+    // 启用之前需安装 @waline/client
+    // 警告: 这是一个仅供演示的测试服务，在生产环境中请自行部署并使用自己的服务！
+    // comment: {
+    //   provider: "Waline",
+    //   serverURL: "https://waline-comment.vuejs.press",
+    // },
 
     components: {
       components: ["Badge", "VPCard"],

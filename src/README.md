@@ -4,8 +4,8 @@ layout: BlogHome
 icon: home
 title: 首页
 #heroImage: logo.svg
-heroText: YouthYnf-技术修补匠
-heroFullScreen: true
+heroText: 程序员Null的自我修养
+heroFullScreen: false
 tagline: 「编程学习+技术分享」涵盖后端开发需要掌握的核心知识
 projects:
   - icon: project
@@ -28,5 +28,5 @@ projects:
     desc: 伙伴详细介绍
     link: https://youthynf.github.io
 
-footer: Power by <a href="https://theme-hope.vuejs.press/zh/">VuePress-theme-hope</a>
+footer: 程序员Null的自我修养
 ---

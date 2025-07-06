@@ -9,7 +9,7 @@ export default defineUserConfig({
   base: "/",
 
   lang: "zh-CN",
-  title: "YouthYnf",
+  title: "程序员Null的自我修养",
   description: "「编程学习+技术分享」涵盖后端开发需要掌握的核心知识",
 
   theme,
@@ -17,7 +17,7 @@ export default defineUserConfig({
   head: [
     // meta
     ["meta", { name: "robots", content: "all" }],
-    ["meta", { name: "author", content: "youthynf" }],
+    ["meta", { name: "author", content: "Null" }],
     [
       "meta",
       {
@@ -32,7 +32,7 @@ export default defineUserConfig({
       {
         name: "keywords",
         content:
-            "Java基础, 多线程, JVM, 虚拟机, 数据库, MySQL, Spring, Redis, MyBatis, 系统设计, 分布式, RPC, 高可用, 高并发",
+            "Java基础, 多线程, JVM, 虚拟机, 数据库, MySQL, Spring, Redis, MyBatis, 系统设计, 分布式, RPC, 高可用, 高并发，架构",
       },
     ],
     [
@@ -40,7 +40,7 @@ export default defineUserConfig({
       {
         name: "description",
         content:
-            "「Java学习 + 面试指南」一份涵盖大部分后端程序员所需要掌握的核心知识",
+            "「后端核心技术 + 面试指南」一份涵盖大部分后端程序员所需要掌握的核心知识",
       },
     ],
     ["meta", { name: "apple-mobile-web-app-capable", content: "yes" }],
