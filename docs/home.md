@@ -3,8 +3,8 @@ home: true
 icon: home
 title: 项目主页
 heroImage: /logo.png
-heroText: 蝉沐风
-tagline: Chanmufeng's Personal Website
+heroText: 程序员Null的自我修养
+tagline: 「编程学习+技术分享」涵盖后端开发需要掌握的核心知识
 actions:
   - text: 使用指南 💡
     link: /guide/

@@ -3,9 +3,9 @@ home: true
 layout: Blog
 icon: home
 title: 主页
-heroImage: "https://qiniu.chanmufeng.com/blog/avatar.png"
-heroText: 蝉沐风的码场
+heroImage: "https://github.com/account"
+heroText: 程序员Null的自我修养
 heroFullScreen: false
-tagline: Chanmufeng's Personal Website
+tagline: 「编程学习+技术分享」涵盖后端开发需要掌握的核心知识
 bgImage: "https://qiniu.chanmufeng.com/blog/bg.jpeg"
 ---

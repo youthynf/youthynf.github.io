@@ -1,7 +1,7 @@
 {
-  "name": "chanmufeng-blog",
+  "name": "youthynf-blog",
   "version": "1.0.0",
-  "description": "chanmufeng's blog",
+  "description": "youthynf's blog",
   "license": "MIT",
   "scripts": {
     "docs:build": "vuepress build docs",
