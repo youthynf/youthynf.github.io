@@ -2,6 +2,7 @@
 title: ElasticSearch详解
 index: false
 icon: creative
+article: false
 category:
   - ES
 ---

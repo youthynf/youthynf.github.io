@@ -2,6 +2,7 @@
 title: JVM原理详解
 index: false
 article: false
+pageInfo: false
 category:
   - JVM
 ---

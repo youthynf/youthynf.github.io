@@ -2,6 +2,7 @@
 title: 计算机网络
 index: false
 article: false
+pageInfo: false
 category:
   - 计算机网络
 ---

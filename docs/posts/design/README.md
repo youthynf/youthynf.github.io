@@ -3,6 +3,7 @@ title: 常用的23种设计模式
 index: false
 icon: creative
 article: false
+pageInfo: false
 category:
   - 设计模式
 ---

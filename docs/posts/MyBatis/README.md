@@ -2,6 +2,7 @@
 title: MyBatis原理入门
 index: false
 article: false
+pageInfo: false
 category:
   - 开发框架
 ---

@@ -2,6 +2,8 @@
 title: MySQL原理入门
 index: false
 icon: creative
+article: false
+pageInfo: false
 category:
   - MySQL
 ---

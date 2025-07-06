@@ -3,6 +3,7 @@ title: JavaEE基础
 index: false
 icon: creative
 article: false
+pageInfo: false
 category:
   - JavaEE
 ---

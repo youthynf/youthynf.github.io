@@ -2,6 +2,8 @@
 title: Redis底层原理入门
 index: false
 icon: creative
+article: false
+pageInfo: false
 category:
   - Redis
 ---

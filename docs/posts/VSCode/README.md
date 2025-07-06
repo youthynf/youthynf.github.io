@@ -3,6 +3,7 @@ title: 高效VSCode
 index: false
 icon: creative
 article: false
+pageInfo: false
 category:
   - 开发工具
 ---

@@ -3,6 +3,7 @@ title: 多线程与高并发
 index: false
 icon: creative
 article: false
+pageInfo: false
 category:
   - 并发
   - 多线程

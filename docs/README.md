@@ -3,6 +3,9 @@ home: true
 layout: Blog
 icon: home
 title: 主页
+index: false
+pageInfo: false
+article: false
 heroImage: ""
 heroText: 程序员Null的自我修养
 heroFullScreen: false
