@@ -1,5 +1,5 @@
 ---
-title: 图解ElasticSearch介绍
+title: ElasticSearch详解
 index: false
 icon: creative
 category:

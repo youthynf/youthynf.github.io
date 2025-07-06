@@ -5,6 +5,6 @@ pageInfo: false
 article: false
 ---
 
-### [机智的程序员小熊](https://coding3min.com/)
+### [机智的程序员小熊](https://codin222g3min.com/)
 
 

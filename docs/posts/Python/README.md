@@ -1,10 +1,10 @@
 ---
-title: 高效IDEA
+title: Python高级程序语言开发
 index: false
 icon: creative
 article: false
 category:
-  - 开发工具
+  - Python
 ---
 
 ## 目录

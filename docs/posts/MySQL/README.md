@@ -1,5 +1,5 @@
 ---
-title: 图解MySQL介绍
+title: MySQL原理入门
 index: false
 icon: creative
 category:

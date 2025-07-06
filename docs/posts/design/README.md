@@ -1,5 +1,5 @@
 ---
-title: 用故事讲设计模式
+title: 常用的23种设计模式
 index: false
 icon: creative
 article: false

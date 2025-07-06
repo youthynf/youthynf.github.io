@@ -1,9 +1,9 @@
 ---
-title: 算法与数据结构
+title: MyBatis原理入门
 index: false
 article: false
 category:
-  - 算法与数据结构
+  - 开发框架
 ---
 
 

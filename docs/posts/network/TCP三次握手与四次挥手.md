@@ -3,7 +3,7 @@ cover: /assets/images/cover2.jpg
 icon: pen-to-square
 date: 2024-06-20
 category:
-  - 计算及网络
+  - 计算机网络
 star: true
 sticky: true
 breadcrumb: false

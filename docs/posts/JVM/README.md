@@ -1,5 +1,5 @@
 ---
-title: 简明JVM教程
+title: JVM原理详解
 index: false
 article: false
 category:

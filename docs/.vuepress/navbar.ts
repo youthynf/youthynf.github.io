@@ -53,7 +53,6 @@ export default navbar([
     children: [
       { text: "IDEA", icon: "jetbrains", link: "/IDEA/" },
       { text: "VSCode", icon: "VsCode", link: "/VSCode/" },
-      { text: "Mac", icon: "mac", link: "/Mac/" },
     ],
   },
   {

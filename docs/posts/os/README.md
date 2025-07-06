@@ -1,9 +1,9 @@
 ---
-title: Linux
+title: 操作系统
 index: false
 article: false
 category:
-  - linux
+  - OS
 ---
 
 
