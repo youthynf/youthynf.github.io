@@ -1,5 +1,6 @@
 import { getDirname, path } from "vuepress/utils";
 import { defineUserConfig } from "vuepress";
+import {docsearchPlugin} from "@vuepress/plugin-docsearch";
 
 import theme from "./theme.js";
 
@@ -65,6 +66,12 @@ export default defineUserConfig({
     ),
   },
 
-  // 和 PWA 一起启用
-  // shouldPrefetch: false,
+  // 配置 Algolia DocSearch
+  plugins: [
+      docsearchPlugin({
+          appId: "8U6XWIU6A0",
+          apiKey: "60e841bc063d8d7514271059f88d4e60",
+          indexName: "chanmufeng"
+      }),
+  ],
 });
