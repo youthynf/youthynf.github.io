@@ -5,7 +5,6 @@ export default sidebar({
             {
                 text: "设计模式",
                 icon: "guide",
-                prefix: "design-pattern/",
                 children: [
                     "单例模式",
                     "工厂模式",
@@ -16,7 +15,6 @@ export default sidebar({
             {
                 text: "设计原则",
                 icon: "guide",
-                prefix: "design-principle/",
                 children: [
                     "开闭原则",
                     "依赖倒置原则",
@@ -25,7 +23,7 @@ export default sidebar({
         ],
 
         // MySQL
-        "/posts/storage/MySQL": [
+        "/posts/MySQL": [
             {
                 text: "1. 基础篇",
                 icon: "strong",
@@ -69,7 +67,7 @@ export default sidebar({
         ],
 
         // Redis
-        "/posts/storage/Redis": [
+        "/posts/Redis": [
             {
                 text: "1. 持久化",
                 icon: "strong",
@@ -98,7 +96,7 @@ export default sidebar({
         ],
 
         // ES
-        "/posts/storage/ElasticSearch": [
+        "/posts/ElasticSearch": [
             "m1芯片电脑安装cerebro",
             "Google搜索为什么不能无限分页？",
         ],
@@ -118,8 +116,6 @@ export default sidebar({
                     "缓存一致性与内存屏障",
                 ]
             },
-
         ],
-
     }
 );

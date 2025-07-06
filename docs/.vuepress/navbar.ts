@@ -3,14 +3,14 @@ import { navbar } from "vuepress-theme-hope";
 export default navbar([
   "/",
   {
-    text: "计算机基础",
+    text: "编程基础",
     icon: "wangluojiekou",
     prefix: "/posts",
     children: [
-        { text: "计算机网络", icon: "", link: "/network" },
-        { text: "操作系统", icon: "", link: "/os" },
-        { text: "结构算法", icon: "", link: "/algorithm" },
-        { text: "设计模式", icon: "", link: "/design" },
+        { text: "计算机网络", icon: "", link: "/network/" },
+        { text: "操作系统", icon: "", link: "/os/" },
+        { text: "结构算法", icon: "", link: "/algorithm/" },
+        { text: "设计模式", icon: "", link: "/design/" },
     ]
   },
   {
@@ -18,9 +18,9 @@ export default navbar([
       icon: "wangluojiekou",
       prefix: "/posts",
       children: [
-          { text: "Java", icon: "", link: "/Java" },
-          { text: "PHP", icon: "", link: "/php" },
-          { text: "Python", icon: "", link: "/Python" },
+          { text: "Java", icon: "", link: "/Java/" },
+          { text: "PHP", icon: "", link: "/PHP/" },
+          { text: "Python", icon: "", link: "/Python/" },
       ]
   },
   {
@@ -28,39 +28,32 @@ export default navbar([
     icon: "xieboke",
     prefix: "/posts",
     children: [
-      {
-        text: "存储篇",
-        icon: "edit",
-        prefix: "/storage",
-        children: [
-          { text: "MySQL", icon: "mysql", link: "/MySQL" },
-          { text: "Redis", icon: "redis", link: "/Redis" },
-          { text: "ES", icon: "elasticsearch-Elasticsearch", link: "/ElasticSearch" },
-        ],
-      },
-      { text: "并发篇", icon: "CPU", link: "/concurrency" },
-      { text: "JVM", icon: "PCxuniji", link: "/JVM" },
-      { text: "Linux", icon: "linux", link: "/os" },
+      { text: "MySQL", icon: "mysql", link: "/MySQL/" },
+      { text: "Redis", icon: "redis", link: "/Redis/" },
+      { text: "ES", icon: "elasticsearch-Elasticsearch", link: "/ElasticSearch/" },
+      { text: "多线程", icon: "CPU", link: "/concurrency/" },
+      { text: "JVM", icon: "PCxuniji", link: "/JVM/" },
+      { text: "Linux", icon: "linux", link: "/os/" },
     ],
   },
   {
       text: "开发框架",
       icon: "keyboard",
-      prefix: "/posts/framework",
+      prefix: "/posts",
       children: [
-        { text: "Spring", icon: "jetbrains", link: "/Spring" },
-        { text: "SpringCloud", icon: "VsCode", link: "/SpringCloud" },
-        { text: "MyBatis", icon: "mac", link: "/MyBatis" },
+        { text: "Spring", icon: "jetbrains", link: "/Spring/" },
+        { text: "SpringCloud", icon: "VsCode", link: "/SpringCloud/" },
+        { text: "MyBatis", icon: "mac", link: "/MyBatis/" },
       ],
   },
   {
     text: "开发工具",
     icon: "keyboard",
-    prefix: "/posts/tools",
+    prefix: "/posts",
     children: [
-      { text: "IDEA", icon: "jetbrains", link: "/IDEA" },
-      { text: "VSCode", icon: "VsCode", link: "/VSCode" },
-      { text: "Mac", icon: "mac", link: "/Mac" },
+      { text: "IDEA", icon: "jetbrains", link: "/IDEA/" },
+      { text: "VSCode", icon: "VsCode", link: "/VSCode/" },
+      { text: "Mac", icon: "mac", link: "/Mac/" },
     ],
   },
   {
