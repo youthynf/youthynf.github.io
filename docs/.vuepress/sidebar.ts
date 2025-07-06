@@ -1,7 +1,7 @@
 import {sidebar} from "vuepress-theme-hope";
 
 export default sidebar({
-        "/posts/basic/": [
+        "/posts/design/": [
             {
                 text: "设计模式",
                 icon: "guide",
@@ -101,7 +101,6 @@ export default sidebar({
         "/posts/storage/ElasticSearch": [
             "m1芯片电脑安装cerebro",
             "Google搜索为什么不能无限分页？",
-
         ],
 
         // 并发

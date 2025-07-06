@@ -7,25 +7,24 @@ export default navbar([
     icon: "wangluojiekou",
     prefix: "/posts",
     children: [
-        { text: "计算机网络", icon: "design", link: "/network/" },
-        { text: "操作系统", icon: "design", link: "/os/" },
-        { text: "算法与数据结构", icon: "design", link: "/algorithm/" },
-        { text: "设计模式与原则", icon: "design", link: "/design/" },
+        { text: "计算机网络", icon: "", link: "/network" },
+        { text: "操作系统", icon: "", link: "/os" },
+        { text: "结构算法", icon: "", link: "/algorithm" },
+        { text: "设计模式", icon: "", link: "/design" },
     ]
   },
   {
-      text: "编程语言",
+      text: "程序语言",
       icon: "wangluojiekou",
       prefix: "/posts",
       children: [
-          { text: "Java", icon: "java", link: "/Java/" },
-          { text: "PHP", icon: "php", link: "/php/" },
-          { text: "Python", icon: "Python", link: "/Python/" },
-          { text: "设计模式与原则", icon: "design", link: "/design/" },
+          { text: "Java", icon: "", link: "/Java" },
+          { text: "PHP", icon: "", link: "/php" },
+          { text: "Python", icon: "", link: "/Python" },
       ]
   },
   {
-    text: "编程技术",
+    text: "编程进阶",
     icon: "xieboke",
     prefix: "/posts",
     children: [
@@ -36,7 +35,7 @@ export default navbar([
         children: [
           { text: "MySQL", icon: "mysql", link: "/MySQL" },
           { text: "Redis", icon: "redis", link: "/Redis" },
-          { text: "ElasticSearch", icon: "elasticsearch-Elasticsearch", link: "/ElasticSearch" },
+          { text: "ES", icon: "elasticsearch-Elasticsearch", link: "/ElasticSearch" },
         ],
       },
       { text: "并发篇", icon: "CPU", link: "/concurrency" },
@@ -47,11 +46,11 @@ export default navbar([
   {
       text: "开发框架",
       icon: "keyboard",
-      prefix: "/posts/tools",
+      prefix: "/posts/framework",
       children: [
-        { text: "Spring", icon: "jetbrains", link: "/Spring/" },
-        { text: "SpringCloud", icon: "VsCode", link: "/SpringCloud/" },
-        { text: "MyBatis", icon: "mac", link: "/MyBatis/" },
+        { text: "Spring", icon: "jetbrains", link: "/Spring" },
+        { text: "SpringCloud", icon: "VsCode", link: "/SpringCloud" },
+        { text: "MyBatis", icon: "mac", link: "/MyBatis" },
       ],
   },
   {
