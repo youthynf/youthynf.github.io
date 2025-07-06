@@ -11,7 +11,7 @@ import "vuepress-theme-hope/src/client/module/blog/styles/info-panel.scss";
 
 const InfoPanel: FunctionalComponent = (): VNode =>
     h("aside", { class: "blog-info-wrapper" }, [
-        h(DropTransition, () => h(WechatInfo)),
+//         h(DropTransition, () => h(WechatInfo)),
         h(DropTransition, () => h(BloggerInfo)),
         h(DropTransition, { delay: 0.04 }, () => h(InfoList)),
     ]);
