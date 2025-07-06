@@ -6,10 +6,8 @@ article: false
 category:
   - 我
 copyright: false
-
 navbar: false
 sidebar: false
-
 breadcrumb: false
 pageInfo: false
 contributors: false
