@@ -100,8 +100,6 @@ export default hopeTheme({
 
     // 搜索插件
     search: {
-      // 使用本地搜索
-      provider: "local",
       // 索引全部内容
       indexContent: true,
       // 为分类和标签添加索引
