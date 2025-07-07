@@ -6,7 +6,7 @@ date: 2024-06-20
 category:
   - MySQL日志
 star: true
-sticky: true
+sticky: false
 breadcrumb: false
 head:
   - - meta

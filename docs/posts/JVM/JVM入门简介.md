@@ -2,6 +2,7 @@
 date: 2024-07-01
 title: JVM入门简介
 category: Java
+description: JVM（Java Virtual Machine）是Java虚拟机的缩写，是运行Java字节码的虚拟机。JVM是Java的核心，是Java的跨平台的关键。JVM是Java的运行环境，是Java程序运行的基础。
 head:
   - - meta
     - name: keywords

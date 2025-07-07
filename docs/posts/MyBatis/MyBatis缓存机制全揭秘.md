@@ -1,12 +1,13 @@
 ---
 title: MyBatis缓存全揭秘
 cover: /assets/images/cover2.jpg
-icon: pen-to-square
+icon: creative
 date: 2025-06-20
 category:
   - MyBatis
+description: 你是否曾经有过这样的困惑：同样的代码、同样的数据库，为什么你的 MyBatis 查询速度却比别人慢了整整 3 倍？明明没有对数据进行修改，为何第二次查询时仍然要苦苦请求数据库？线上环境中偶尔出现的“幽灵数据”究竟从何而来？其实，这些问题的答案都隐藏在 MyBatis 那个容易被忽视的 `<cache/>` 标签之中！今天，就让我们深入探究缓存的核心奥秘，破解性能背后的玄学谜题。
 star: true
-sticky: true
+sticky: false
 breadcrumb: false
 head:
   - - meta
