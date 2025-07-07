@@ -25,7 +25,7 @@ export default sidebar({
         // MySQL
         "/posts/MySQL": [
             {
-                text: "1. 基础篇",
+                text: "基础篇",
                 icon: "strong",
                 children: [
                     "一条SELECT语句是如何执行的",
@@ -33,7 +33,7 @@ export default sidebar({
                 ]
             },
             {
-                text: "2. 索引篇",
+                text: "索引篇",
                 icon: "condition",
                 children: [
                     "为什么MySQL的主键查询这么快",
@@ -43,7 +43,7 @@ export default sidebar({
                 ]
             },
             {
-                text: "3. 事务与锁",
+                text: "事务与锁",
                 icon: "lock",
                 children: [
                     "事务的隔离性与MVCC",
@@ -51,7 +51,15 @@ export default sidebar({
                 ]
             },
             {
-                text: "4. 数据一致性",
+                text: "日志篇",
+                icon: "lock",
+                children: [
+                    "undo",
+                    "MySQL锁开篇",
+                ]
+            },
+            {
+                text: "数据一致性",
                 icon: "lock",
                 children: [
                     "MySQL与Redis的数据一致性",
@@ -100,6 +108,15 @@ export default sidebar({
             "m1芯片电脑安装cerebro",
             "Google搜索为什么不能无限分页？",
         ],
+
+        // MyBatis
+        "/posts/MyBatis": [
+            "MyBatis缓存机制全揭秘"
+        ],
+
+        "/posts/JVM": [
+            "JVM入门简介"
+        ]
 
         // 并发
         "/posts/concurrency": [
