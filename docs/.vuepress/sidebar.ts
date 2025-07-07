@@ -116,7 +116,7 @@ export default sidebar({
 
         "/posts/JVM": [
             "JVM入门简介"
-        ]
+        ],
 
         // 并发
         "/posts/concurrency": [
