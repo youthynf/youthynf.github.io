@@ -134,5 +134,9 @@ export default sidebar({
                 ]
             },
         ],
+        // Spring
+        "/posts/Spring": [
+            "深入剖析Spring中Bean对象生命周期.md"
+        ],
     }
 );

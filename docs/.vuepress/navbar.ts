@@ -14,26 +14,19 @@ export default navbar([
     ]
   },
   {
-      text: "程序语言",
-      icon: "wangluojiekou",
-      prefix: "/posts",
-      children: [
-          { text: "Java", icon: "", link: "/Java/" },
-          { text: "PHP", icon: "", link: "/PHP/" },
-          { text: "Python", icon: "", link: "/Python/" },
-      ]
-  },
-  {
     text: "编程进阶",
     icon: "xieboke",
     prefix: "/posts",
     children: [
-      { text: "MySQL", icon: "mysql", link: "/MySQL/" },
-      { text: "Redis", icon: "redis", link: "/Redis/" },
-      { text: "ES", icon: "elasticsearch-Elasticsearch", link: "/ElasticSearch/" },
-      { text: "多线程", icon: "CPU", link: "/concurrency/" },
-      { text: "JVM", icon: "PCxuniji", link: "/JVM/" },
-      { text: "Linux", icon: "linux", link: "/os/" },
+        { text: "Java", icon: "java", link: "/Java/" },
+        { text: "PHP", icon: "elephant", link: "/PHP/" },
+        { text: "Python", icon: "python", link: "/Python/" },
+        { text: "MySQL", icon: "mysql", link: "/MySQL/" },
+        { text: "Redis", icon: "redis", link: "/Redis/" },
+        { text: "ES", icon: "elasticsearch-Elasticsearch", link: "/ElasticSearch/" },
+        { text: "高并发", icon: "CPU", link: "/concurrency/" },
+        { text: "JVM", icon: "PCxuniji", link: "/JVM/" },
+        { text: "Linux", icon: "linux", link: "/os/" },
     ],
   },
   {
@@ -51,8 +44,8 @@ export default navbar([
     icon: "keyboard",
     prefix: "/posts",
     children: [
-      { text: "IDEA", icon: "jetbrains", link: "/IDEA/" },
-      { text: "VSCode", icon: "VsCode", link: "/VSCode/" },
+        { text: "IDEA", icon: "jetbrains", link: "/IDEA/" },
+        { text: "VSCode", icon: "VsCode", link: "/VSCode/" },
     ],
   },
   {
