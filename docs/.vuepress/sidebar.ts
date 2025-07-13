@@ -138,5 +138,13 @@ export default sidebar({
         "/posts/Spring": [
             "深入剖析Spring中Bean对象生命周期.md"
         ],
+        "/posts/Java": [
+            {
+                text: "JUC-集合",
+                children: [
+                    "抽丝剥茧学ConcurrentHashMap底层原理.md",
+                ]
+            }
+        ],
     }
 );
